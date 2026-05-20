@@ -11,7 +11,7 @@ import {
 import "./summit.css";
 
 const desertHero = "/customer-summit/desert-hero.jpg";
-const summitBadge = "/customer-summit/summit-badge.png";
+const summitTitle = "/customer-summit/summit-title.png";
 const resortImg = "/customer-summit/resort.jpg";
 const resortSpa = "/customer-summit/resort-spa.jpg";
 const resortSuite = "/customer-summit/resort-suite.jpg";
@@ -259,19 +259,16 @@ export default function SummitPage() {
           <div className="relative z-10 flex-1 flex items-center px-6 lg:px-16 pt-24 pb-20 max-w-7xl mx-auto w-full">
             <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-              {/* Hero title */}
+              {/* Hero title image */}
               <div className="flex justify-center lg:justify-end order-first lg:order-last animate-float">
-                <div
-                  className="font-display text-white uppercase text-center lg:text-right leading-[0.9]"
-                  style={{
-                    fontSize: "clamp(3rem, 8vw, 5.5rem)",
-                    textShadow: "0 0 60px rgba(240,80,160,0.5), 0 4px 20px rgba(0,0,0,0.6)",
-                  }}
-                >
-                  <div>HawkSearch</div>
-                  <div>Customer</div>
-                  <div>Summit &apos;26</div>
-                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={summitTitle}
+                  alt="HawkSearch Customer Summit '26"
+                  width={733}
+                  height={300}
+                  className="w-72 sm:w-96 lg:w-[480px] xl:w-[560px] drop-shadow-[0_0_60px_rgba(240,80,160,0.4)]"
+                />
               </div>
 
               {/* Text + countdown + CTA */}
