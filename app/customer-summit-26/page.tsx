@@ -11,12 +11,12 @@ import {
 import "./summit.css";
 
 const desertHero = "/customer-summit/desert-hero.jpg";
-const summitBadge = "/customer-summit/summit-badge.png";
+const summitTitle = "/customer-summit/summit-title.png";
 const resortImg = "/customer-summit/resort.jpg";
 const resortSpa = "/customer-summit/resort-spa.jpg";
 const resortSuite = "/customer-summit/resort-suite.jpg";
 const resortDining = "/customer-summit/resort-dining.jpg";
-const summitEnergy = "/customer-summit/summit-energy.jpg";
+const summitEnergy = "/customer-summit/summit-reception.jpg";
 const hawksearchLogo = "/customer-summit/hawksearch-logo.png";
 const ianHeller = "/customer-summit/ian-heller.jpg";
 
@@ -259,15 +259,15 @@ export default function SummitPage() {
           <div className="relative z-10 flex-1 flex items-center px-6 lg:px-16 pt-24 pb-20 max-w-7xl mx-auto w-full">
             <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-              {/* Badge */}
-              <div className="flex justify-center lg:justify-end order-first lg:order-last">
+              {/* Hero title image */}
+              <div className="flex justify-center lg:justify-end order-first lg:order-last animate-float">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={summitBadge}
+                  src={summitTitle}
                   alt="HawkSearch Customer Summit '26"
-                  width={600}
-                  height={520}
-                  className="w-64 sm:w-80 lg:w-[420px] xl:w-[480px] drop-shadow-[0_30px_60px_rgba(240,80,160,0.45)] animate-float"
+                  width={733}
+                  height={300}
+                  className="w-72 sm:w-96 lg:w-[480px] xl:w-[560px] drop-shadow-[0_0_60px_rgba(240,80,160,0.4)]"
                 />
               </div>
 
@@ -612,7 +612,7 @@ export default function SummitPage() {
           <div className="grid lg:grid-cols-2">
             <div className="relative min-h-[420px]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={summitEnergy} alt="Energetic crowd at HawkSearch summit" loading="lazy" width={1280} height={896} className="absolute inset-0 w-full h-full object-cover" />
+              <img src={summitEnergy} alt="Attendees networking at HawkSearch Summit '25" loading="eager" width={1280} height={896} className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-night to-transparent" />
             </div>
             <div className="relative bg-card p-8 sm:p-12 lg:p-20 flex flex-col justify-center">
@@ -626,7 +626,7 @@ export default function SummitPage() {
                 {[
                   { v: "98%", l: "Would attend again" },
                   { v: "4.9★", l: "Avg session rating" },
-                  { v: "60+", l: "Brands represented" },
+                  { v: "100+", l: "Leaders in attendance" },
                 ].map((s) => (
                   <div key={s.l}>
                     <div className="font-display text-3xl text-gradient-sunset">{s.v}</div>
@@ -735,7 +735,7 @@ export default function SummitPage() {
                 },
                 {
                   q: "How do I register?",
-                  a: "Click the Register Now button to secure your spot. Space is limited so we recommend registering early!",
+                  a: <>Click the <a href="#register" className="text-gradient-sunset hover:opacity-80 transition-opacity">Register Now</a> button to secure your spot. Space is limited so we recommend registering early!</>,
                 },
                 {
                   q: "Want to start planning your trip?",
