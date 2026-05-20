@@ -56,7 +56,7 @@ function PrimaryCTA({ children, href = "#register" }: { children: React.ReactNod
   return (
     <a
       href={href}
-      className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 px-8 py-4 font-semibold text-white transition-all hover:bg-white/30 hover:scale-[1.03] active:scale-[0.98]"
+      className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-gradient-sunset px-8 py-4 font-bold text-white shadow-[0_0_40px_-5px_oklch(0.73_0.26_348/0.7)] transition-all hover:scale-[1.03] hover:shadow-[0_0_55px_-5px_oklch(0.73_0.26_348/0.9)] active:scale-[0.98]"
     >
       <span>{children}</span>
       <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
