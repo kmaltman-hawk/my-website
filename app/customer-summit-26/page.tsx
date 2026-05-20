@@ -296,13 +296,16 @@ export default function SummitPage() {
 
         {/* ===== STATS ===== */}
         <section className="relative bg-night/60" style={{ borderTop: "1px solid rgba(255,255,255,0.1)", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3">
             {[
               { v: "3", l: "Days of summit" },
               { v: "20+", l: "Speakers & experts" },
               { v: "150+", l: "eCommerce leaders" },
             ].map((s, i) => (
-              <div key={s.l} className="px-6 py-10 text-center" style={{ borderTop: i > 0 ? "1px solid rgba(255,255,255,0.1)" : undefined, ...(i > 0 ? { ["@media (min-width: 768px)" as any]: { borderTop: "none", borderLeft: "1px solid rgba(255,255,255,0.1)" } } : {}) }}>
+              <div
+                key={s.l}
+                className={`px-6 py-10 text-center ${i > 0 ? "border-t md:border-t-0 md:border-l border-white/10" : ""}`}
+              >
                 <div className="font-display text-5xl text-gradient-sunset">{s.v}</div>
                 <div className="mt-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{s.l}</div>
               </div>
