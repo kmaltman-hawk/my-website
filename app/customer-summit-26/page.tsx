@@ -11,6 +11,7 @@ import {
 import "./summit.css";
 
 const desertHero = "/customer-summit/desert-hero.jpg";
+const summitBadge = "/customer-summit/summit-badge.png";
 const resortImg = "/customer-summit/resort.jpg";
 const resortSpa = "/customer-summit/resort-spa.jpg";
 const resortSuite = "/customer-summit/resort-suite.jpg";
@@ -55,7 +56,7 @@ function PrimaryCTA({ children, href = "#register" }: { children: React.ReactNod
   return (
     <a
       href={href}
-      className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-gradient-sunset px-8 py-4 font-semibold text-primary-foreground shadow-glow animate-pulse-glow transition-transform hover:scale-[1.03] active:scale-[0.98]"
+      className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-gradient-sunset px-8 py-4 font-bold text-white shadow-[0_0_40px_-5px_oklch(0.73_0.26_348/0.7)] transition-all hover:scale-[1.03] hover:shadow-[0_0_55px_-5px_oklch(0.73_0.26_348/0.9)] active:scale-[0.98]"
     >
       <span>{children}</span>
       <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -108,7 +109,7 @@ const SUMMIT_FORM_CSS = `
   }
   .hs-button, input[type="submit"] {
     width: 100% !important; border: none !important; border-radius: 9999px !important;
-    background: linear-gradient(135deg, #c0392b 0%, #e07020 50%, #e8a030 100%) !important;
+    background: linear-gradient(180deg, #f0519e 0%, #f07040 55%, #ffb070 100%) !important;
     padding: 16px !important; font-size: 16px !important; font-weight: 700 !important;
     color: #1a0a28 !important; cursor: pointer !important; margin-top: 8px !important; display: block !important;
   }
@@ -222,11 +223,12 @@ export default function SummitPage() {
             height={1280}
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night/80" />
+          {/* Pink-tinted gradient overlay to tie into the summit branding */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[oklch(0.22_0.10_320/0.75)] via-[oklch(0.18_0.06_290/0.45)] to-[oklch(0.14_0.05_285/0.92)]" />
 
           {/* Sticky Nav */}
           <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 py-4 bg-night/40 backdrop-blur-md border-b border-white/10">
-            <a href="#top" className="flex items-center">
+            <a href="https://www.hawksearch.com" target="_blank" rel="noopener noreferrer" className="flex items-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={hawksearchLogo} alt="HawkSearch" className="h-8 w-auto drop-shadow" />
             </a>
@@ -253,37 +255,51 @@ export default function SummitPage() {
             </div>
           </nav>
 
-          {/* Centered hero content */}
-          <div className="relative z-10 flex-1 flex items-center justify-center px-6 lg:px-12 max-w-5xl mx-auto w-full pb-20 text-center">
-            <div className="w-full">
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur border border-white/20 px-4 py-1.5 text-xs uppercase tracking-[0.3em] text-white mb-8">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-sunset animate-pulse" />
-                October 21 – 23 · Scottsdale, AZ
+          {/* Hero content — badge left / details right on desktop */}
+          <div className="relative z-10 flex-1 flex items-center px-6 lg:px-16 pt-24 pb-20 max-w-7xl mx-auto w-full">
+            <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+
+              {/* Badge */}
+              <div className="flex justify-center lg:justify-end order-first lg:order-last">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={summitBadge}
+                  alt="HawkSearch Customer Summit '26"
+                  width={600}
+                  height={520}
+                  className="w-64 sm:w-80 lg:w-[420px] xl:w-[480px] drop-shadow-[0_30px_60px_rgba(240,80,160,0.45)] animate-float"
+                />
               </div>
-              <h1 className="font-display text-white text-6xl sm:text-7xl lg:text-8xl leading-[0.95] mb-6 drop-shadow-[0_6px_30px_rgba(0,0,0,0.5)]">
-                HawkSearch<br />Customer Summit <span className="text-gradient-sunset">&apos;26</span>
-              </h1>
-              <p className="text-lg sm:text-xl text-white/90 max-w-2xl mx-auto mb-10">
-                3 days to transform eCommerce AI search — keynotes, workshops, roadmap reveals, and the desert nights you&apos;ll be talking about all year.
-              </p>
-              <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10">
-                {countdown ? (
-                  <>
-                    <CountdownCell value={countdown.days} label="Days" />
-                    <CountdownCell value={countdown.hours} label="Hours" />
-                    <CountdownCell value={countdown.minutes} label="Min" />
-                    <CountdownCell value={countdown.seconds} label="Sec" />
-                  </>
-                ) : (
-                  <>
-                    <CountdownCell value={0} label="Days" />
-                    <CountdownCell value={0} label="Hours" />
-                    <CountdownCell value={0} label="Min" />
-                    <CountdownCell value={0} label="Sec" />
-                  </>
-                )}
-              </div>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+
+              {/* Text + countdown + CTA */}
+              <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+                <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur border border-white/20 px-4 py-1.5 text-xs uppercase tracking-[0.3em] text-white mb-6">
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-sunset animate-pulse" />
+                  October 21 – 23 · Scottsdale, AZ
+                </div>
+
+                <p className="text-lg sm:text-xl text-white/85 max-w-md mb-8">
+                  3 days to transform eCommerce AI search — keynotes, workshops, roadmap reveals, and the desert nights you&apos;ll be talking about all year.
+                </p>
+
+                <div className="flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3 mb-8">
+                  {countdown ? (
+                    <>
+                      <CountdownCell value={countdown.days} label="Days" />
+                      <CountdownCell value={countdown.hours} label="Hours" />
+                      <CountdownCell value={countdown.minutes} label="Min" />
+                      <CountdownCell value={countdown.seconds} label="Sec" />
+                    </>
+                  ) : (
+                    <>
+                      <CountdownCell value={0} label="Days" />
+                      <CountdownCell value={0} label="Hours" />
+                      <CountdownCell value={0} label="Min" />
+                      <CountdownCell value={0} label="Sec" />
+                    </>
+                  )}
+                </div>
+
                 <PrimaryCTA href="#register">Register Now</PrimaryCTA>
               </div>
             </div>
@@ -296,13 +312,16 @@ export default function SummitPage() {
 
         {/* ===== STATS ===== */}
         <section className="relative bg-night/60" style={{ borderTop: "1px solid rgba(255,255,255,0.1)", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3">
             {[
               { v: "3", l: "Days of summit" },
               { v: "20+", l: "Speakers & experts" },
               { v: "150+", l: "eCommerce leaders" },
             ].map((s, i) => (
-              <div key={s.l} className="px-6 py-10 text-center" style={{ borderTop: i > 0 ? "1px solid rgba(255,255,255,0.1)" : undefined, ...(i > 0 ? { ["@media (min-width: 768px)" as any]: { borderTop: "none", borderLeft: "1px solid rgba(255,255,255,0.1)" } } : {}) }}>
+              <div
+                key={s.l}
+                className={`px-6 py-10 text-center ${i > 0 ? "border-t md:border-t-0 md:border-l border-white/10" : ""}`}
+              >
                 <div className="font-display text-5xl text-gradient-sunset">{s.v}</div>
                 <div className="mt-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{s.l}</div>
               </div>
@@ -343,12 +362,12 @@ export default function SummitPage() {
         </section>
 
         {/* ===== WHY ATTEND ===== */}
-        <section className="relative py-24 px-6 lg:px-12">
+        <section className="relative py-12 sm:py-24 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto">
-            <div className="flex items-end justify-between flex-wrap gap-6 mb-16">
+            <div className="flex items-end justify-between flex-wrap gap-6 mb-8 sm:mb-16">
               <div>
                 <div className="text-xs uppercase tracking-[0.3em] text-sunset mb-4">Why you&apos;ll be there</div>
-                <h2 className="text-5xl sm:text-7xl">
+                <h2 className="text-4xl sm:text-5xl lg:text-7xl">
                   Four reasons.<br />
                   <span className="text-gradient-sunset">Zero excuses.</span>
                 </h2>
@@ -382,12 +401,12 @@ export default function SummitPage() {
         </section>
 
         {/* ===== AGENDA ===== */}
-        <section id="agenda" className="relative py-24 px-6 lg:px-12 bg-night/40">
+        <section id="agenda" className="relative py-12 sm:py-24 px-6 lg:px-12 bg-night/40">
           <div className="max-w-5xl mx-auto">
             <div className="text-xs uppercase tracking-[0.3em] text-sunset mb-4">Three days, no filler</div>
-            <h2 className="text-5xl sm:text-7xl mb-16">The <span className="text-gradient-sunset">agenda</span></h2>
+            <h2 className="text-4xl sm:text-5xl lg:text-7xl mb-8 sm:mb-16">The <span className="text-gradient-sunset">agenda</span></h2>
 
-            <Accordion type="single" collapsible defaultValue="day-02" className="space-y-3">
+            <Accordion type="single" collapsible className="space-y-3">
               {[
                 {
                   value: "day-01",
@@ -490,8 +509,8 @@ export default function SummitPage() {
         </section>
 
         {/* ===== MID-PAGE CTA ===== */}
-        <section className="relative px-6 lg:px-12 py-16">
-          <div className="max-w-5xl mx-auto rounded-3xl bg-gradient-sunset p-10 sm:p-14 text-center relative overflow-hidden shadow-glow">
+        <section className="relative px-6 lg:px-12 py-8 sm:py-16">
+          <div className="max-w-5xl mx-auto rounded-3xl bg-gradient-sunset p-7 sm:p-14 text-center relative overflow-hidden shadow-glow">
             <div className="absolute inset-0 bg-night/10" />
             <div className="relative">
               <div className="text-xs uppercase tracking-[0.3em] text-white/80 mb-4">Seats are limited</div>
@@ -499,18 +518,26 @@ export default function SummitPage() {
               <p className="text-white/90 max-w-xl mx-auto mb-8">
                 Lock in your spot for three days of keynotes, training, and desert nights you won&apos;t forget.
               </p>
-              <PrimaryCTA href="#register">Register Now</PrimaryCTA>
+              <a
+                href="#register"
+                className="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-white bg-transparent px-8 py-4 font-bold text-white transition-all hover:bg-white/15 hover:scale-[1.03] active:scale-[0.98]"
+              >
+                <span>Register Now</span>
+                <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
             </div>
           </div>
         </section>
 
         {/* ===== SPEAKERS ===== */}
-        <section id="speakers" className="relative py-24 px-6 lg:px-12">
+        <section id="speakers" className="relative py-12 sm:py-24 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto">
-            <div className="flex items-end justify-between flex-wrap gap-4 mb-16">
+            <div className="flex items-end justify-between flex-wrap gap-4 mb-8 sm:mb-16">
               <div>
                 <div className="text-xs uppercase tracking-[0.3em] text-sunset mb-4">On stage</div>
-                <h2 className="text-5xl sm:text-7xl">Featured <span className="text-gradient-sunset">speakers</span></h2>
+                <h2 className="text-4xl sm:text-5xl lg:text-7xl">Featured <span className="text-gradient-sunset">speakers</span></h2>
               </div>
             </div>
 
@@ -522,8 +549,8 @@ export default function SummitPage() {
                   <div className="inline-block text-[10px] uppercase tracking-[0.3em] px-3 py-1.5 rounded-full bg-gradient-sunset text-primary-foreground mb-5 font-semibold">
                     ★ Featured Speaker
                   </div>
-                  <h3 className="font-display text-5xl sm:text-6xl mb-3">Ian Heller</h3>
-                  <p className="text-xl text-sand mb-6">Chief Strategy Officer, Distribution Strategy Group</p>
+                  <h3 className="font-display text-3xl sm:text-5xl lg:text-6xl mb-3">Ian Heller</h3>
+                  <p className="text-base sm:text-xl text-sand mb-6">Chief Strategy Officer, Distribution Strategy Group</p>
                   <div className="text-[10px] uppercase tracking-[0.25em] text-sunset mb-2 font-semibold">Session</div>
                   <h4 className="font-display text-2xl sm:text-3xl leading-snug mb-4">
                     Your Website Is Bigger Than You Think: Attribution, Disruption, and the ROI Case Your Leadership Will Actually Believe
@@ -588,9 +615,9 @@ export default function SummitPage() {
               <img src={summitEnergy} alt="Energetic crowd at HawkSearch summit" loading="lazy" width={1280} height={896} className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-night to-transparent" />
             </div>
-            <div className="relative bg-card p-12 lg:p-20 flex flex-col justify-center">
+            <div className="relative bg-card p-8 sm:p-12 lg:p-20 flex flex-col justify-center">
               <div className="text-xs uppercase tracking-[0.3em] text-sunset mb-4">Last year, in the room</div>
-              <h2 className="text-5xl mb-6">Summit &apos;25 <span className="text-gradient-sunset">was unforgettable.</span></h2>
+              <h2 className="text-3xl sm:text-5xl mb-6">Summit &apos;25 <span className="text-gradient-sunset">was unforgettable.</span></h2>
               <p className="text-muted-foreground text-lg mb-8">
                 150+ leaders. Standing-room sessions. Roadmap reveals that changed roadmaps.
                 A rooftop reception that stretched until midnight. We&apos;re turning it up for &apos;26.
@@ -612,7 +639,7 @@ export default function SummitPage() {
         </section>
 
         {/* ===== HOTEL ===== */}
-        <section id="hotel" className="relative py-24 px-6 lg:px-12">
+        <section id="hotel" className="relative py-12 sm:py-24 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
             <HotelSlideshow
               slides={[
@@ -624,7 +651,7 @@ export default function SummitPage() {
             />
             <div>
               <div className="text-xs uppercase tracking-[0.3em] text-sunset mb-4">Where you&apos;ll stay</div>
-              <h2 className="text-5xl sm:text-6xl mb-6">Scottsdale Resort & Spa</h2>
+              <h2 className="text-3xl sm:text-5xl lg:text-6xl mb-6">Scottsdale Resort & Spa</h2>
               <p className="text-muted-foreground text-lg mb-4">
                 Curio Collection by Hilton — a refined desert escape blending Southwest soul with modern luxury.
                 Spacious meeting venues, full-service spa, championship golf, and Old Town minutes away.
@@ -656,8 +683,8 @@ export default function SummitPage() {
         </section>
 
         {/* ===== CONVINCE YOUR BOSS ===== */}
-        <section className="relative px-6 lg:px-12 py-20">
-          <div className="max-w-4xl mx-auto rounded-3xl border border-border bg-card p-10 sm:p-14 relative overflow-hidden">
+        <section className="relative px-6 lg:px-12 py-10 sm:py-20">
+          <div className="max-w-4xl mx-auto rounded-3xl border border-border bg-card p-6 sm:p-14 relative overflow-hidden">
             <div className="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-gradient-sunset opacity-10 blur-3xl" />
             <div className="relative grid md:grid-cols-[1fr_auto] gap-8 items-center">
               <div>
@@ -680,10 +707,10 @@ export default function SummitPage() {
         </section>
 
         {/* ===== FAQ ===== */}
-        <section className="relative py-24 px-6 lg:px-12">
+        <section className="relative py-12 sm:py-24 px-6 lg:px-12">
           <div className="max-w-3xl mx-auto">
             <div className="text-xs uppercase tracking-[0.3em] text-sunset mb-4 text-center">Got questions?</div>
-            <h2 className="text-5xl sm:text-7xl mb-16 text-center">Frequently <span className="text-gradient-sunset">Asked</span></h2>
+            <h2 className="text-4xl sm:text-5xl lg:text-7xl mb-8 sm:mb-16 text-center">Frequently <span className="text-gradient-sunset">Asked</span></h2>
             <Accordion type="single" collapsible className="space-y-4">
               {[
                 {
@@ -746,12 +773,12 @@ export default function SummitPage() {
         </section>
 
         {/* ===== REGISTER ===== */}
-        <section id="register" className="relative py-32 px-6 lg:px-12 overflow-hidden">
+        <section id="register" className="relative py-16 sm:py-32 px-6 lg:px-12 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-dusk opacity-90" />
           <div className="absolute inset-0" style={{ backgroundImage: "var(--gradient-radial-glow)" }} />
           <div className="relative max-w-4xl mx-auto text-center">
             <div className="text-xs uppercase tracking-[0.3em] text-sand mb-6">Limited seats · group hotel rate ends soon</div>
-            <h2 className="text-6xl sm:text-8xl mb-8">
+            <h2 className="text-4xl sm:text-6xl lg:text-8xl mb-8">
               See you in the<br />
               <span className="text-gradient-sunset">desert.</span>
             </h2>
@@ -768,8 +795,8 @@ export default function SummitPage() {
         {/* ===== FOOTER ===== */}
         <footer className="border-t border-border py-10 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-            <div className="font-display text-foreground">hawksearch · summit &apos;26</div>
-            <div>© 2026 HawkSearch. Scottsdale, AZ — Oct 21–23.</div>
+            <a href="https://www.hawksearch.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">hawksearch.com</a>
+            <div>© 2026 HawkSearch. All rights reserved.</div>
           </div>
         </footer>
       </main>
