@@ -10,9 +10,9 @@ export const metadata: Metadata = {
       "HawkSearch Customer Summit '26 brings together eCommerce search leaders for three days of hands-on training, roadmap sessions, and peer networking in Scottsdale, AZ. October 21–23, 2026.",
     images: [
       {
-        url: "/customer-summit/desert-hero.jpg",
-        width: 1920,
-        height: 1280,
+        url: "/customer-summit/og-summit.png",
+        width: 1200,
+        height: 630,
         alt: "HawkSearch Customer Summit 2026 — Scottsdale, AZ",
       },
     ],
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     title: "HawkSearch Customer Summit 2026",
     description:
       "HawkSearch Customer Summit '26 brings together eCommerce search leaders for three days of hands-on training, roadmap sessions, and peer networking in Scottsdale, AZ. October 21–23, 2026.",
-    images: ["/customer-summit/desert-hero.jpg"],
+    images: ["/customer-summit/og-summit.png"],
   },
 };
 
