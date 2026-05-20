@@ -795,8 +795,8 @@ export default function SummitPage() {
         {/* ===== FOOTER ===== */}
         <footer className="border-t border-border py-10 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-            <div className="font-display text-foreground">hawksearch · summit &apos;26</div>
-            <div>© 2026 HawkSearch. Scottsdale, AZ — Oct 21–23.</div>
+            <a href="https://www.hawksearch.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">hawksearch.com</a>
+            <div>© 2026 HawkSearch. All rights reserved.</div>
           </div>
         </footer>
       </main>
