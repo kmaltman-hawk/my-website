@@ -11,6 +11,7 @@ import {
 import "./summit.css";
 
 const desertHero = "/customer-summit/desert-hero.jpg";
+const summitBadge = "/customer-summit/summit-badge.png";
 const resortImg = "/customer-summit/resort.jpg";
 const resortSpa = "/customer-summit/resort-spa.jpg";
 const resortSuite = "/customer-summit/resort-suite.jpg";
@@ -108,7 +109,7 @@ const SUMMIT_FORM_CSS = `
   }
   .hs-button, input[type="submit"] {
     width: 100% !important; border: none !important; border-radius: 9999px !important;
-    background: linear-gradient(135deg, #c0392b 0%, #e07020 50%, #e8a030 100%) !important;
+    background: linear-gradient(180deg, #f0519e 0%, #f07040 55%, #ffb070 100%) !important;
     padding: 16px !important; font-size: 16px !important; font-weight: 700 !important;
     color: #1a0a28 !important; cursor: pointer !important; margin-top: 8px !important; display: block !important;
   }
@@ -222,11 +223,12 @@ export default function SummitPage() {
             height={1280}
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night/80" />
+          {/* Pink-tinted gradient overlay to tie into the summit branding */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[oklch(0.22_0.10_320/0.75)] via-[oklch(0.18_0.06_290/0.45)] to-[oklch(0.14_0.05_285/0.92)]" />
 
           {/* Sticky Nav */}
           <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 py-4 bg-night/40 backdrop-blur-md border-b border-white/10">
-            <a href="#top" className="flex items-center">
+            <a href="https://www.hawksearch.com" target="_blank" rel="noopener noreferrer" className="flex items-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={hawksearchLogo} alt="HawkSearch" className="h-8 w-auto drop-shadow" />
             </a>
@@ -253,37 +255,51 @@ export default function SummitPage() {
             </div>
           </nav>
 
-          {/* Centered hero content */}
-          <div className="relative z-10 flex-1 flex items-center justify-center px-6 lg:px-12 max-w-5xl mx-auto w-full pb-20 text-center">
-            <div className="w-full">
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur border border-white/20 px-4 py-1.5 text-xs uppercase tracking-[0.3em] text-white mb-8">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-sunset animate-pulse" />
-                October 21 – 23 · Scottsdale, AZ
+          {/* Hero content — badge left / details right on desktop */}
+          <div className="relative z-10 flex-1 flex items-center px-6 lg:px-16 pt-24 pb-20 max-w-7xl mx-auto w-full">
+            <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+
+              {/* Badge */}
+              <div className="flex justify-center lg:justify-end order-first lg:order-last">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={summitBadge}
+                  alt="HawkSearch Customer Summit '26"
+                  width={600}
+                  height={520}
+                  className="w-64 sm:w-80 lg:w-[420px] xl:w-[480px] drop-shadow-[0_30px_60px_rgba(240,80,160,0.45)] animate-float"
+                />
               </div>
-              <h1 className="font-display text-white text-4xl sm:text-6xl lg:text-8xl leading-[0.95] mb-6 drop-shadow-[0_6px_30px_rgba(0,0,0,0.5)]">
-                HawkSearch<br />Customer Summit <span className="text-gradient-sunset">&apos;26</span>
-              </h1>
-              <p className="text-lg sm:text-xl text-white/90 max-w-2xl mx-auto mb-10">
-                3 days to transform eCommerce AI search — keynotes, workshops, roadmap reveals, and the desert nights you&apos;ll be talking about all year.
-              </p>
-              <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10">
-                {countdown ? (
-                  <>
-                    <CountdownCell value={countdown.days} label="Days" />
-                    <CountdownCell value={countdown.hours} label="Hours" />
-                    <CountdownCell value={countdown.minutes} label="Min" />
-                    <CountdownCell value={countdown.seconds} label="Sec" />
-                  </>
-                ) : (
-                  <>
-                    <CountdownCell value={0} label="Days" />
-                    <CountdownCell value={0} label="Hours" />
-                    <CountdownCell value={0} label="Min" />
-                    <CountdownCell value={0} label="Sec" />
-                  </>
-                )}
-              </div>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+
+              {/* Text + countdown + CTA */}
+              <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+                <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur border border-white/20 px-4 py-1.5 text-xs uppercase tracking-[0.3em] text-white mb-6">
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-sunset animate-pulse" />
+                  October 21 – 23 · Scottsdale, AZ
+                </div>
+
+                <p className="text-lg sm:text-xl text-white/85 max-w-md mb-8">
+                  3 days to transform eCommerce AI search — keynotes, workshops, roadmap reveals, and the desert nights you&apos;ll be talking about all year.
+                </p>
+
+                <div className="flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3 mb-8">
+                  {countdown ? (
+                    <>
+                      <CountdownCell value={countdown.days} label="Days" />
+                      <CountdownCell value={countdown.hours} label="Hours" />
+                      <CountdownCell value={countdown.minutes} label="Min" />
+                      <CountdownCell value={countdown.seconds} label="Sec" />
+                    </>
+                  ) : (
+                    <>
+                      <CountdownCell value={0} label="Days" />
+                      <CountdownCell value={0} label="Hours" />
+                      <CountdownCell value={0} label="Min" />
+                      <CountdownCell value={0} label="Sec" />
+                    </>
+                  )}
+                </div>
+
                 <PrimaryCTA href="#register">Register Now</PrimaryCTA>
               </div>
             </div>
