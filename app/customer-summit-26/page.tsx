@@ -56,7 +56,7 @@ function PrimaryCTA({ children, href = "#register" }: { children: React.ReactNod
   return (
     <a
       href={href}
-      className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-gradient-sunset px-8 py-4 font-semibold text-primary-foreground shadow-glow animate-pulse-glow transition-transform hover:scale-[1.03] active:scale-[0.98]"
+      className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 px-8 py-4 font-semibold text-white transition-all hover:bg-white/30 hover:scale-[1.03] active:scale-[0.98]"
     >
       <span>{children}</span>
       <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -406,7 +406,7 @@ export default function SummitPage() {
             <div className="text-xs uppercase tracking-[0.3em] text-sunset mb-4">Three days, no filler</div>
             <h2 className="text-4xl sm:text-5xl lg:text-7xl mb-8 sm:mb-16">The <span className="text-gradient-sunset">agenda</span></h2>
 
-            <Accordion type="single" collapsible defaultValue="day-02" className="space-y-3">
+            <Accordion type="single" collapsible className="space-y-3">
               {[
                 {
                   value: "day-01",
