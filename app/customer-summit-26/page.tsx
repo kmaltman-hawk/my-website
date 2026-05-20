@@ -738,7 +738,7 @@ export default function SummitPage() {
                 },
                 {
                   q: "How do I register?",
-                  a: "Click the Register Now button to secure your spot. Space is limited so we recommend registering early!",
+                  a: <>Click the <a href="#register" className="text-gradient-sunset hover:opacity-80 transition-opacity">Register Now</a> button to secure your spot. Space is limited so we recommend registering early!</>,
                 },
                 {
                   q: "Want to start planning your trip?",
