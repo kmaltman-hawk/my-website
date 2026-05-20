@@ -518,7 +518,15 @@ export default function SummitPage() {
               <p className="text-white/90 max-w-xl mx-auto mb-8">
                 Lock in your spot for three days of keynotes, training, and desert nights you won&apos;t forget.
               </p>
-              <PrimaryCTA href="#register">Register Now</PrimaryCTA>
+              <a
+                href="#register"
+                className="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-white bg-transparent px-8 py-4 font-bold text-white transition-all hover:bg-white/15 hover:scale-[1.03] active:scale-[0.98]"
+              >
+                <span>Register Now</span>
+                <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
             </div>
           </div>
         </section>
