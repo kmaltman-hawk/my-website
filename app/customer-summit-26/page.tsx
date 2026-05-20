@@ -260,7 +260,7 @@ export default function SummitPage() {
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-sunset animate-pulse" />
                 October 21 – 23 · Scottsdale, AZ
               </div>
-              <h1 className="font-display text-white text-6xl sm:text-7xl lg:text-8xl leading-[0.95] mb-6 drop-shadow-[0_6px_30px_rgba(0,0,0,0.5)]">
+              <h1 className="font-display text-white text-4xl sm:text-6xl lg:text-8xl leading-[0.95] mb-6 drop-shadow-[0_6px_30px_rgba(0,0,0,0.5)]">
                 HawkSearch<br />Customer Summit <span className="text-gradient-sunset">&apos;26</span>
               </h1>
               <p className="text-lg sm:text-xl text-white/90 max-w-2xl mx-auto mb-10">
@@ -343,12 +343,12 @@ export default function SummitPage() {
         </section>
 
         {/* ===== WHY ATTEND ===== */}
-        <section className="relative py-24 px-6 lg:px-12">
+        <section className="relative py-12 sm:py-24 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto">
-            <div className="flex items-end justify-between flex-wrap gap-6 mb-16">
+            <div className="flex items-end justify-between flex-wrap gap-6 mb-8 sm:mb-16">
               <div>
                 <div className="text-xs uppercase tracking-[0.3em] text-sunset mb-4">Why you&apos;ll be there</div>
-                <h2 className="text-5xl sm:text-7xl">
+                <h2 className="text-4xl sm:text-5xl lg:text-7xl">
                   Four reasons.<br />
                   <span className="text-gradient-sunset">Zero excuses.</span>
                 </h2>
@@ -382,10 +382,10 @@ export default function SummitPage() {
         </section>
 
         {/* ===== AGENDA ===== */}
-        <section id="agenda" className="relative py-24 px-6 lg:px-12 bg-night/40">
+        <section id="agenda" className="relative py-12 sm:py-24 px-6 lg:px-12 bg-night/40">
           <div className="max-w-5xl mx-auto">
             <div className="text-xs uppercase tracking-[0.3em] text-sunset mb-4">Three days, no filler</div>
-            <h2 className="text-5xl sm:text-7xl mb-16">The <span className="text-gradient-sunset">agenda</span></h2>
+            <h2 className="text-4xl sm:text-5xl lg:text-7xl mb-8 sm:mb-16">The <span className="text-gradient-sunset">agenda</span></h2>
 
             <Accordion type="single" collapsible defaultValue="day-02" className="space-y-3">
               {[
@@ -490,8 +490,8 @@ export default function SummitPage() {
         </section>
 
         {/* ===== MID-PAGE CTA ===== */}
-        <section className="relative px-6 lg:px-12 py-16">
-          <div className="max-w-5xl mx-auto rounded-3xl bg-gradient-sunset p-10 sm:p-14 text-center relative overflow-hidden shadow-glow">
+        <section className="relative px-6 lg:px-12 py-8 sm:py-16">
+          <div className="max-w-5xl mx-auto rounded-3xl bg-gradient-sunset p-7 sm:p-14 text-center relative overflow-hidden shadow-glow">
             <div className="absolute inset-0 bg-night/10" />
             <div className="relative">
               <div className="text-xs uppercase tracking-[0.3em] text-white/80 mb-4">Seats are limited</div>
@@ -505,12 +505,12 @@ export default function SummitPage() {
         </section>
 
         {/* ===== SPEAKERS ===== */}
-        <section id="speakers" className="relative py-24 px-6 lg:px-12">
+        <section id="speakers" className="relative py-12 sm:py-24 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto">
-            <div className="flex items-end justify-between flex-wrap gap-4 mb-16">
+            <div className="flex items-end justify-between flex-wrap gap-4 mb-8 sm:mb-16">
               <div>
                 <div className="text-xs uppercase tracking-[0.3em] text-sunset mb-4">On stage</div>
-                <h2 className="text-5xl sm:text-7xl">Featured <span className="text-gradient-sunset">speakers</span></h2>
+                <h2 className="text-4xl sm:text-5xl lg:text-7xl">Featured <span className="text-gradient-sunset">speakers</span></h2>
               </div>
             </div>
 
@@ -522,8 +522,8 @@ export default function SummitPage() {
                   <div className="inline-block text-[10px] uppercase tracking-[0.3em] px-3 py-1.5 rounded-full bg-gradient-sunset text-primary-foreground mb-5 font-semibold">
                     ★ Featured Speaker
                   </div>
-                  <h3 className="font-display text-5xl sm:text-6xl mb-3">Ian Heller</h3>
-                  <p className="text-xl text-sand mb-6">Chief Strategy Officer, Distribution Strategy Group</p>
+                  <h3 className="font-display text-3xl sm:text-5xl lg:text-6xl mb-3">Ian Heller</h3>
+                  <p className="text-base sm:text-xl text-sand mb-6">Chief Strategy Officer, Distribution Strategy Group</p>
                   <div className="text-[10px] uppercase tracking-[0.25em] text-sunset mb-2 font-semibold">Session</div>
                   <h4 className="font-display text-2xl sm:text-3xl leading-snug mb-4">
                     Your Website Is Bigger Than You Think: Attribution, Disruption, and the ROI Case Your Leadership Will Actually Believe
@@ -588,9 +588,9 @@ export default function SummitPage() {
               <img src={summitEnergy} alt="Energetic crowd at HawkSearch summit" loading="lazy" width={1280} height={896} className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-night to-transparent" />
             </div>
-            <div className="relative bg-card p-12 lg:p-20 flex flex-col justify-center">
+            <div className="relative bg-card p-8 sm:p-12 lg:p-20 flex flex-col justify-center">
               <div className="text-xs uppercase tracking-[0.3em] text-sunset mb-4">Last year, in the room</div>
-              <h2 className="text-5xl mb-6">Summit &apos;25 <span className="text-gradient-sunset">was unforgettable.</span></h2>
+              <h2 className="text-3xl sm:text-5xl mb-6">Summit &apos;25 <span className="text-gradient-sunset">was unforgettable.</span></h2>
               <p className="text-muted-foreground text-lg mb-8">
                 150+ leaders. Standing-room sessions. Roadmap reveals that changed roadmaps.
                 A rooftop reception that stretched until midnight. We&apos;re turning it up for &apos;26.
@@ -612,7 +612,7 @@ export default function SummitPage() {
         </section>
 
         {/* ===== HOTEL ===== */}
-        <section id="hotel" className="relative py-24 px-6 lg:px-12">
+        <section id="hotel" className="relative py-12 sm:py-24 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
             <HotelSlideshow
               slides={[
@@ -624,7 +624,7 @@ export default function SummitPage() {
             />
             <div>
               <div className="text-xs uppercase tracking-[0.3em] text-sunset mb-4">Where you&apos;ll stay</div>
-              <h2 className="text-5xl sm:text-6xl mb-6">Scottsdale Resort & Spa</h2>
+              <h2 className="text-3xl sm:text-5xl lg:text-6xl mb-6">Scottsdale Resort & Spa</h2>
               <p className="text-muted-foreground text-lg mb-4">
                 Curio Collection by Hilton — a refined desert escape blending Southwest soul with modern luxury.
                 Spacious meeting venues, full-service spa, championship golf, and Old Town minutes away.
@@ -656,8 +656,8 @@ export default function SummitPage() {
         </section>
 
         {/* ===== CONVINCE YOUR BOSS ===== */}
-        <section className="relative px-6 lg:px-12 py-20">
-          <div className="max-w-4xl mx-auto rounded-3xl border border-border bg-card p-10 sm:p-14 relative overflow-hidden">
+        <section className="relative px-6 lg:px-12 py-10 sm:py-20">
+          <div className="max-w-4xl mx-auto rounded-3xl border border-border bg-card p-6 sm:p-14 relative overflow-hidden">
             <div className="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-gradient-sunset opacity-10 blur-3xl" />
             <div className="relative grid md:grid-cols-[1fr_auto] gap-8 items-center">
               <div>
@@ -680,10 +680,10 @@ export default function SummitPage() {
         </section>
 
         {/* ===== FAQ ===== */}
-        <section className="relative py-24 px-6 lg:px-12">
+        <section className="relative py-12 sm:py-24 px-6 lg:px-12">
           <div className="max-w-3xl mx-auto">
             <div className="text-xs uppercase tracking-[0.3em] text-sunset mb-4 text-center">Got questions?</div>
-            <h2 className="text-5xl sm:text-7xl mb-16 text-center">Frequently <span className="text-gradient-sunset">Asked</span></h2>
+            <h2 className="text-4xl sm:text-5xl lg:text-7xl mb-8 sm:mb-16 text-center">Frequently <span className="text-gradient-sunset">Asked</span></h2>
             <Accordion type="single" collapsible className="space-y-4">
               {[
                 {
@@ -746,12 +746,12 @@ export default function SummitPage() {
         </section>
 
         {/* ===== REGISTER ===== */}
-        <section id="register" className="relative py-32 px-6 lg:px-12 overflow-hidden">
+        <section id="register" className="relative py-16 sm:py-32 px-6 lg:px-12 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-dusk opacity-90" />
           <div className="absolute inset-0" style={{ backgroundImage: "var(--gradient-radial-glow)" }} />
           <div className="relative max-w-4xl mx-auto text-center">
             <div className="text-xs uppercase tracking-[0.3em] text-sand mb-6">Limited seats · group hotel rate ends soon</div>
-            <h2 className="text-6xl sm:text-8xl mb-8">
+            <h2 className="text-4xl sm:text-6xl lg:text-8xl mb-8">
               See you in the<br />
               <span className="text-gradient-sunset">desert.</span>
             </h2>
