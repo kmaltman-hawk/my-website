@@ -412,9 +412,10 @@ export default function SummitPage() {
                   value: "day-01",
                   day: "Day 01",
                   date: "Wednesday, Oct 21",
-                  preview: "Opening Cocktail Gathering · Dinner",
+                  preview: "Optional Golf · Cocktail Gathering · Sponsored Dinners",
                   sessions: [
-                    { time: "3:00 – 5:00 PM", title: "Opening Cocktail Gathering", tag: "Social" },
+                    { time: "12:30 – 4:00 PM", title: "Optional: Golf Outing", tag: "Social" },
+                    { time: "4:00 – 6:00 PM", title: "Opening Cocktail Gathering", tag: "Social" },
                     { time: "5:00 – 7:00 PM", title: "Dinner", tag: "Dining" },
                   ],
                 },
@@ -422,31 +423,31 @@ export default function SummitPage() {
                   value: "day-02",
                   day: "Day 02",
                   date: "Thursday, Oct 22",
-                  preview: "Keynote · Training · Roadmap · Bar Crawl",
+                  preview: "Keynote · Training · Roadmap · Old Town Social",
                   sessions: [
                     { time: "9:00 AM", title: "Networking Breakfast", tag: "Networking" },
                     { time: "9:00 – 9:30 AM", title: "Opening Keynote", tag: "Keynote" },
-                    { time: "9:30 – 10:00 AM", title: "Customer Case Study", tag: "Case Study" },
+                    { time: "9:30 – 10:00 AM", title: "Assistants: Live! Customer Case Study", tag: "Case Study" },
                     { time: "10:00 – 10:30 AM", title: "HawkSearch Customer Presentation: MRC Global", tag: "Presentation" },
-                    { time: "10:30 – 11:00 AM", title: "Customer Panel Discussion: UPS Store & More", tag: "Panel" },
+                    { time: "10:30 – 11:00 AM", title: "Customer Panel Discussion: UPS Store, TBD, TBD", tag: "Panel" },
                     { time: "11:00 AM – 12:00 PM", title: "Ian Heller — Distribution Strategy Group", tag: "Keynote" },
                     { time: "12:00 – 1:00 PM", title: "Lunch", tag: "Break" },
-                    { time: "1:00 – 1:30 PM", title: "Title Sponsor Presentation", tag: "Sponsor" },
-                    { time: "1:30 – 2:00 PM", title: "Partner Panel Discussion", tag: "Panel" },
-                    { time: "2:00 – 2:30 PM", title: "HawkSearch Training: Agentic Prompt Engineering", tag: "Training" },
-                    { time: "2:30 – 3:00 PM", title: "HawkSearch Customer Presentation: Caterpillar / Perkins Engines", tag: "Presentation" },
+                    { time: "1:00 – 1:30 PM", title: "Luminos Labs Presentation", tag: "Sponsor" },
+                    { time: "1:30 – 2:00 PM", title: "Panel Discussion with Shopware and Pimberly", tag: "Panel" },
+                    { time: "2:00 – 2:30 PM", title: "HawkSearch Training: Agentic Engineering", tag: "Training" },
+                    { time: "2:30 – 3:00 PM", title: "HawkSearch Customer Presentation: TBA", tag: "Presentation" },
                     { time: "3:00 – 3:30 PM", title: "Networking Break With Sponsors", tag: "Networking" },
-                    { time: "3:30 – 4:00 PM", title: "HawkSearch Roadmap", tag: "Roadmap" },
-                    { time: "4:00 – 5:00 PM", title: "Break", tag: "Break" },
-                    { time: "5:30 – 7:30 PM", title: "Dinner & Drinks", tag: "Social" },
-                    { time: "8:00 – 10:00 PM", title: "Bar Crawl", tag: "Social" },
+                    { time: "3:30 – 4:15 PM", title: "HawkSearch Roadmap", tag: "Roadmap" },
+                    { time: "4:15 – 5:00 PM", title: "Break", tag: "Break" },
+                    { time: "5:30 – 7:30 PM", title: "Old Town Social Tour — Dinner", tag: "Social" },
+                    { time: "8:00 – 10:00 PM", title: "Old Town Social Tour — Special Event", tag: "Social" },
                   ],
                 },
                 {
                   value: "day-03",
                   day: "Day 03",
                   date: "Friday, Oct 23",
-                  preview: "Training · Roundtable · Golf Outing",
+                  preview: "Training · Roundtable · Poolside Closing Party",
                   sessions: [
                     { time: "8:00 – 9:00 AM", title: "Networking Breakfast", tag: "Networking" },
                     { time: "9:00 – 9:30 AM", title: "HawkSearch Trivia", tag: "Social" },
@@ -454,10 +455,9 @@ export default function SummitPage() {
                     { time: "9:30 – 10:30 AM", title: "Hands-On Training Session 2 — Topic TBA", tag: "Training" },
                     { time: "10:30 – 11:00 AM", title: "HawkSearch Customer Presentation: TBA", tag: "Presentation" },
                     { time: "11:00 – 11:30 AM", title: "Break (Coffee & Snacks)", tag: "Break" },
-                    { time: "11:30 AM – 12:00 PM", title: "Customer Case Study", tag: "Case Study" },
+                    { time: "11:30 AM – 12:00 PM", title: "Assistants: Live! Customer Case Study", tag: "Case Study" },
                     { time: "12:00 – 1:00 PM", title: "Roundtable Takeaways", tag: "Session" },
-                    { time: "1:00 – 2:00 PM", title: "Poolside Closing Party & Lunch", tag: "Social" },
-                    { time: "2:00 – 5:00 PM", title: "Golf Outing", tag: "Social" },
+                    { time: "1:00 – 3:00 PM", title: "Poolside Closing Party (Lunch)", tag: "Social" },
                   ],
                 },
               ].map((dayBlock) => (
@@ -572,6 +572,38 @@ export default function SummitPage() {
               </div>
             </div>
 
+            {/* Guest speakers */}
+            <div className="mb-10">
+              <div className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-6">Guest Speakers</div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+                {[
+                  { n: "Jameel Dharsee", r: "Sr. Director of eCommerce, MRC Global", img: "/customer-summit/speaker-jameel-dharsee.jpg" },
+                  // { n: "Robert Connelly", r: "Technology Marketing & Franchisee Communications Manager, The UPS Store", img: "/customer-summit/speaker-robert-connelly.jpg" },
+                  { n: "Martin Balaam", r: "CEO & Founder, Pimberly", img: "/customer-summit/speaker-martin-balaam.jpg" },
+                  { n: "Radu Munteanu", r: "Founder, Luminos Labs", img: "/customer-summit/speaker-radu-munteanu.png" },
+                ].map((s) => (
+                  <div key={s.n} className="group">
+                    <div className="aspect-square rounded-2xl bg-gradient-sunset relative overflow-hidden flex items-center justify-center font-display text-5xl text-primary-foreground transition-transform group-hover:scale-[1.02]">
+                      {s.img ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={s.img} alt={s.n} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+                      ) : (
+                        <>
+                          <div className="absolute inset-0 bg-night/30 group-hover:bg-night/10 transition-colors" />
+                          <span className="relative text-2xl">📷</span>
+                        </>
+                      )}
+                    </div>
+                    <div className="mt-4">
+                      <div className="font-semibold">{s.n}</div>
+                      <div className="text-sm text-muted-foreground">{s.r}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-6">HawkSearch Team</div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
               {[
                 { n: "Ari Kahn", r: "President & CEO", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/649407a6c32a3c2b9fcec6ee_Ari%20K.webp" },
@@ -638,6 +670,55 @@ export default function SummitPage() {
           </div>
         </section>
 
+        {/* ===== TESTIMONIALS ===== */}
+        <section className="relative py-12 sm:py-24 px-6 lg:px-12 bg-night/40" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-10 sm:mb-16">
+              <div className="text-xs uppercase tracking-[0.3em] text-sunset mb-4">From the community</div>
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl">
+                Hear it from <span className="text-gradient-sunset">our customers</span>
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6 lg:gap-10">
+              {/* TODO: replace src with real YouTube/Vimeo embed URL */}
+              {[
+                {
+                  company: "First Supply",
+                  quote: "HawkSearch completely transformed how our customers find products.",
+                  embedUrl: "https://www.youtube.com/embed/f91pf4V7qKI?si=Q-_s6Bx3fNZv49KU",
+                },
+                {
+                  company: "Pacific Plumbing",
+                  quote: "The summit gave us strategies we implemented the week we got back.",
+                  embedUrl: "https://www.youtube.com/embed/cr3JL_5tNPc?si=GjnGs402yx2wgVQ4",
+                },
+              ].map((t) => (
+                <div
+                  key={t.company}
+                  className="rounded-3xl border border-border bg-card overflow-hidden shadow-elegant"
+                >
+                  {/* Video embed */}
+                  <div className="relative w-full aspect-video bg-night">
+                    <iframe
+                      src={t.embedUrl}
+                      title={`${t.company} testimonial`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="absolute inset-0 w-full h-full"
+                    />
+                  </div>
+                  {/* Caption */}
+                  <div className="px-7 py-6">
+                    <p className="text-base text-foreground/90 italic mb-4">&ldquo;{t.quote}&rdquo;</p>
+                    <div className="text-xs uppercase tracking-[0.25em] text-sunset font-semibold">{t.company}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* ===== HOTEL ===== */}
         <section id="hotel" className="relative py-12 sm:py-24 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
@@ -664,20 +745,46 @@ export default function SummitPage() {
           </div>
         </section>
 
-        {/* ===== SPONSORS MARQUEE ===== */}
-        {/* Hidden until partner logos are ready */}
-        <section className="hidden py-16 border-y border-border bg-night/40 overflow-hidden">
-          <div className="text-center text-xs uppercase tracking-[0.3em] text-muted-foreground mb-8">
-            Powered by partners pushing commerce forward
-          </div>
-          <div className="relative flex overflow-hidden">
-            <div className="flex shrink-0 marquee gap-16 pr-16">
-              {["XNGAGE", "Shopware", "Groove Commerce", "Pimberly", "Znode", "oBundle", "Luminos Labs", "RDA Digital", "Commerce.com", "Cronix", "Americaneagle.com",
-                "XNGAGE", "Shopware", "Groove Commerce", "Pimberly", "Znode", "oBundle", "Luminos Labs", "RDA Digital", "Commerce.com", "Cronix", "Americaneagle.com"].map((p, i) => (
-                <span key={i} className="font-display text-2xl text-muted-foreground/70 whitespace-nowrap">
-                  {p}
-                </span>
-              ))}
+        {/* ===== SPONSORS ===== */}
+        <section className="py-16 px-6 lg:px-12 border-y border-border bg-night/40">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center text-xs uppercase tracking-[0.3em] text-muted-foreground mb-12">
+              Powered by partners pushing commerce forward
+            </div>
+
+            {/* Title sponsor */}
+            <div className="mb-10">
+              <div className="text-center text-[10px] uppercase tracking-[0.3em] text-sunset mb-6 font-semibold">Title Sponsor</div>
+              <div className="flex justify-center">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/customer-summit/sponsor-luminoslabs.png"
+                  alt="Luminos Labs"
+                  className="h-12 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity brightness-0 invert"
+                />
+              </div>
+            </div>
+
+            {/* Divider */}
+            <div className="border-t border-border mb-10" />
+
+            {/* Gold sponsors */}
+            <div>
+              <div className="text-center text-[10px] uppercase tracking-[0.3em] text-sand mb-6 font-semibold">Gold Sponsors</div>
+              <div className="flex flex-wrap justify-center items-center gap-12">
+                {[
+                  { src: "/customer-summit/sponsor-shopware.webp", alt: "Shopware" },
+                  { src: "/customer-summit/sponsor-pimberly.webp", alt: "Pimberly" },
+                ].map((s) => (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    key={s.alt}
+                    src={s.src}
+                    alt={s.alt}
+                    className="h-10 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity brightness-0 invert"
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </section>
