@@ -412,7 +412,7 @@ export default function SummitPage() {
                   value: "day-01",
                   day: "Day 01",
                   date: "Wednesday, Oct 21",
-                  preview: "Optional Golf · Cocktail Gathering · Sponsored Dinners",
+                  preview: "Golf (optional) · Welcome Cocktails · Dinner",
                   sessions: [
                     { time: "12:30 – 4:00 PM", title: "Optional: Golf Outing", tag: "Social" },
                     { time: "4:00 – 6:00 PM", title: "Opening Cocktail Gathering", tag: "Social" },
@@ -423,7 +423,7 @@ export default function SummitPage() {
                   value: "day-02",
                   day: "Day 02",
                   date: "Thursday, Oct 22",
-                  preview: "Keynote · Training · Roadmap · Old Town Social",
+                  preview: "Keynotes · Training · Roadmap · Old Town Social Tour",
                   sessions: [
                     { time: "9:00 AM", title: "Networking Breakfast", tag: "Networking" },
                     { time: "9:00 – 9:30 AM", title: "Opening Keynote", tag: "Keynote" },
@@ -447,7 +447,7 @@ export default function SummitPage() {
                   value: "day-03",
                   day: "Day 03",
                   date: "Friday, Oct 23",
-                  preview: "Training · Roundtable · Poolside Closing Party",
+                  preview: "Training · Roundtables · Poolside Closing Party",
                   sessions: [
                     { time: "8:00 – 9:00 AM", title: "Networking Breakfast", tag: "Networking" },
                     { time: "9:00 – 9:30 AM", title: "HawkSearch Trivia", tag: "Social" },
