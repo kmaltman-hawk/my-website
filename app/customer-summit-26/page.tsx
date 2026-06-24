@@ -769,7 +769,7 @@ export default function SummitPage() {
             <div className="border-t border-border mb-10" />
 
             {/* Gold sponsors */}
-            <div>
+            <div className="mb-10">
               <div className="text-center text-[10px] uppercase tracking-[0.3em] text-sand mb-6 font-semibold">Gold Sponsors</div>
               <div className="flex flex-wrap justify-center items-center gap-12">
                 {[
@@ -784,6 +784,22 @@ export default function SummitPage() {
                     className="h-10 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity brightness-0 invert"
                   />
                 ))}
+              </div>
+            </div>
+
+            {/* Divider */}
+            <div className="border-t border-border mb-10" />
+
+            {/* Silver sponsors */}
+            <div>
+              <div className="text-center text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-6 font-semibold">Silver Sponsors</div>
+              <div className="flex flex-wrap justify-center items-center gap-12">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/customer-summit/sponsor-conexiom.svg"
+                  alt="Conexiom"
+                  className="h-4 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity brightness-0 invert"
+                />
               </div>
             </div>
           </div>
