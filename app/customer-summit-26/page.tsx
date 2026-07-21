@@ -178,7 +178,7 @@ function FeaturedSpeakerCarousel() {
   const [cardWidth, setCardWidth] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
   const count = FEATURED_SPEAKERS.length;
-  const PEEK = 80;
+  const PEEK = 160;
   const GAP = 20;
 
   useEffect(() => {
@@ -536,19 +536,19 @@ export default function SummitPage() {
                   value: "day-02",
                   day: "Day 02",
                   date: "Thursday, Oct 22",
-                  preview: "Keynotes · Training · Roadmap · Old Town Social Tour",
+                  preview: "Keynotes · Training · Dev Track · Roadmap · Old Town Social Tour",
                   sessions: [
                     { time: "9:00 AM", title: "Networking Breakfast", tag: "Networking" },
                     { time: "9:00 – 9:30 AM", title: "Opening Keynote", tag: "Keynote" },
                     { time: "9:30 – 10:00 AM", title: "Assistants: Live! Customer Case Study", tag: "Case Study" },
                     { time: "10:00 – 10:30 AM", title: "HawkSearch Customer Presentation: MRC Global", tag: "Presentation" },
                     { time: "10:30 – 11:00 AM", title: "Customer Panel Discussion: UPS Store, TBD, TBD", tag: "Panel" },
-                    { time: "11:00 AM – 12:00 PM", title: "Ian Heller — Distribution Strategy Group", tag: "Keynote" },
-                    { time: "12:00 – 1:00 PM", title: "Lunch", tag: "Break" },
-                    { time: "1:00 – 1:30 PM", title: "Luminos Labs Presentation", tag: "Sponsor" },
-                    { time: "1:30 – 2:00 PM", title: "Panel Discussion with Shopware and Pimberly", tag: "Panel" },
-                    { time: "2:00 – 2:30 PM", title: "HawkSearch Training: Agentic Engineering", tag: "Training" },
-                    { time: "2:30 – 3:00 PM", title: "HawkSearch Customer Presentation: TBA", tag: "Presentation" },
+                    { time: "", title: "", tag: "Track Columns" },
+                    { time: "11:00 AM – 12:00 PM", tag: "Concurrent", tracks: { main: [{ title: "Ian Heller — Distribution Strategy Group", tag: "Keynote" }], dev: [{ title: "Agentic Data: Ingesting/Scraping PDF Data", tag: "Dev Track" }] } },
+                    { time: "12:00 – 1:00 PM", tag: "Concurrent", tracks: { main: [{ title: "Lunch", tag: "Break" }], dev: [{ title: "Lunch", tag: "Break" }] } },
+                    { time: "1:00 – 2:00 PM", tag: "Concurrent", tracks: { main: [{ title: "Luminos Labs Presentation", tag: "Sponsor" }, { title: "Panel Discussion with Shopware and Pimberly", tag: "Panel" }], dev: [{ title: "Agentic UX: Tooling, Endpoints, Styling, Prompting", tag: "Dev Track" }] } },
+                    { time: "2:00 – 2:30 PM", tag: "Concurrent", tracks: { main: [{ title: "HawkSearch Training: Agentic Engineering", tag: "Training" }], dev: [{ title: "Core HawkSearch: Mastering Backend API's (Mapping, Hierarchy & More)", tag: "Dev Track" }] } },
+                    { time: "2:30 – 3:00 PM", tag: "Concurrent", tracks: { main: [{ title: "HawkSearch Customer Presentation: TBA", tag: "Presentation" }], dev: [{ title: "Core HawkSearch: Forgotten UX (Visual Facets, Instant Engage, Autocomplete)", tag: "Dev Track" }] } },
                     { time: "3:00 – 3:30 PM", title: "Networking Break With Sponsors", tag: "Networking" },
                     { time: "3:30 – 4:15 PM", title: "HawkSearch Roadmap", tag: "Roadmap" },
                     { time: "4:15 – 5:00 PM", title: "Break", tag: "Break" },
@@ -591,8 +591,65 @@ export default function SummitPage() {
                   <AccordionContent className="pb-5">
                     <div className="space-y-2 pt-2">
                       {dayBlock.sessions.map((session, i) => {
-                        const isBreak = session.tag === "Break";
-                        const isSocial = ["Social", "Dining", "Networking"].includes(session.tag);
+                        const s = session as any;
+
+                        if (s.tag === "Track Columns") {
+                          return (
+                            <div key={i} className="grid grid-cols-2 gap-2 px-4 pb-1 pt-4">
+                              <div className="flex justify-center">
+                                <span className="text-[10px] uppercase tracking-[0.2em] text-sand font-semibold px-3 py-1 rounded-full bg-white/10 border border-border/60">Main Track</span>
+                              </div>
+                              <div className="flex justify-center">
+                                <span className="text-[10px] uppercase tracking-[0.2em] text-blue-300 font-semibold px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30">Dev Track</span>
+                              </div>
+                            </div>
+                          );
+                        }
+
+                        if (s.tag === "Concurrent") {
+                          const tagStyle = (tag: string) =>
+                            tag === "Keynote" || tag === "Roadmap" ? "bg-gradient-sunset text-primary-foreground" :
+                            tag === "Training" ? "bg-saguaro/20 text-saguaro" :
+                            tag === "Break" ? "bg-white/10 text-sand opacity-60" :
+                            tag === "Dev Track" ? "bg-blue-500/20 text-blue-300" :
+                            "bg-white/10 text-sand";
+                          return (
+                            <div key={i} className="space-y-1">
+                              <div className="text-xs text-muted-foreground tabular-nums px-1">{s.time}</div>
+                              <div className="grid grid-cols-2 gap-2">
+                                <div className="rounded-xl px-4 py-3 border border-border/60 bg-white/5 space-y-2">
+                                  {s.tracks.main.map((m: any, j: number) => (
+                                    <div key={j} className="flex items-start justify-between gap-2">
+                                      <span className="text-sm font-medium flex-1">{m.title}</span>
+                                      <span className={`text-[10px] uppercase tracking-[0.2em] px-2 py-0.5 rounded-full shrink-0 ${tagStyle(m.tag)}`}>{m.tag}</span>
+                                    </div>
+                                  ))}
+                                </div>
+                                <div className="rounded-xl px-4 py-3 border border-blue-500/20 bg-blue-500/5 space-y-2">
+                                  {s.tracks.dev.map((d: any, j: number) => (
+                                    <div key={j} className="flex items-start justify-between gap-2">
+                                      <span className="text-sm font-medium flex-1">{d.title}</span>
+                                      <span className={`text-[10px] uppercase tracking-[0.2em] px-2 py-0.5 rounded-full shrink-0 ${tagStyle(d.tag)}`}>{d.tag}</span>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        }
+
+                        if (s.tag === "Track Header") {
+                          return (
+                            <div key={i} className="flex items-center gap-3 pt-3 pb-1">
+                              <div className="h-px flex-1 bg-border/60" />
+                              <div className="text-[10px] uppercase tracking-[0.2em] text-sand font-semibold px-3">{s.title}</div>
+                              <div className="h-px flex-1 bg-border/60" />
+                            </div>
+                          );
+                        }
+
+                        const isBreak = s.tag === "Break";
+                        const isSocial = ["Social", "Dining", "Networking"].includes(s.tag);
                         return (
                           <div
                             key={i}
@@ -600,15 +657,15 @@ export default function SummitPage() {
                               isBreak ? "border-border/40 opacity-50" : "bg-white/5 border-border/60"
                             }`}
                           >
-                            <div className="text-xs text-muted-foreground tabular-nums shrink-0 w-44">{session.time}</div>
-                            <div className="flex-1 text-sm font-medium">{session.title}</div>
+                            <div className="text-xs text-muted-foreground tabular-nums shrink-0 w-44">{s.time}</div>
+                            <div className="flex-1 text-sm font-medium">{s.title}</div>
                             <div className={`text-[10px] uppercase tracking-[0.2em] px-2.5 py-1 rounded-full shrink-0 ${
                               isSocial ? "bg-sunset/20 text-sunset" :
-                              session.tag === "Keynote" || session.tag === "Roadmap" ? "bg-gradient-sunset text-primary-foreground" :
-                              session.tag === "Training" ? "bg-saguaro/20 text-saguaro" :
+                              s.tag === "Keynote" || s.tag === "Roadmap" ? "bg-gradient-sunset text-primary-foreground" :
+                              s.tag === "Training" ? "bg-saguaro/20 text-saguaro" :
                               "bg-white/10 text-sand"
                             }`}>
-                              {session.tag}
+                              {s.tag}
                             </div>
                           </div>
                         );
