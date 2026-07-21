@@ -203,6 +203,9 @@
   font-size: 1.125rem;
 }
 
+/* Hide scrollbar on featured speaker carousel track */
+.summit-wrapper .carousel-track::-webkit-scrollbar { display: none; }
+
 /* accordion animations */
 @keyframes accordion-down {
   from { height: 0; }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { TrendingUp, Users, Lightbulb, Sparkles } from "lucide-react";
 import {
   Accordion,
@@ -18,7 +18,6 @@ const resortSuite = "/customer-summit/resort-suite.jpg";
 const resortDining = "/customer-summit/resort-dining.jpg";
 const summitEnergy = "/customer-summit/summit-reception.jpg";
 const hawksearchLogo = "/customer-summit/hawksearch-logo.png";
-const ianHeller = "/customer-summit/ian-heller.jpg";
 
 const EVENT_DATE = new Date("2026-10-21T09:00:00-07:00");
 
@@ -153,6 +152,120 @@ function HubSpotForm() {
   }, []);
 
   return <div id="hs-form-target" />;
+}
+
+const FEATURED_SPEAKERS = [
+  {
+    name: "Ian Heller",
+    title: "Chief Strategy Officer, Distribution Strategy Group",
+    img: "/customer-summit/ian-heller.jpg",
+    imgAlt: "Ian Heller, Chief Strategy Officer at Distribution Strategy Group",
+    sessionTitle: "Your Website Is Bigger Than You Think: Attribution, Disruption, and the ROI Case Your Leadership Will Actually Believe",
+    sessionDesc: "Ian Heller — Chief Strategy Officer of Distribution Strategy Group and a four-time VP of Marketing in distribution — unveils an attribution method that consistently surfaces 4–12x more revenue than the shopping cart alone, why the growth of Home Depot, Amazon, QXO, Sonepar, and Grainger makes closing the capabilities gap urgent, and how to set marketing goals — and earn the investment — that your leadership will actually believe.",
+  },
+  {
+    name: "Jameel Dharsee",
+    title: "Sr. Director of eCommerce, MRC Global",
+    img: "/customer-summit/speaker-jameel-dharsee.jpg",
+    imgAlt: "Jameel Dharsee, Sr. Director of eCommerce at MRC Global",
+    sessionTitle: "The Storefront That Knows Everything: HawkSearch as Your ERP Bridge",
+    sessionDesc: "MRC Global did a massive ERP overhaul, and the one source of truth across all of them is actually HawkSearch. Now their internal sales team uses the website to find products, they can see inventory & prices status across all branches and now the website is the internal sales tool.",
+  },
+];
+
+function FeaturedSpeakerCarousel() {
+  const [idx, setIdx] = useState(0);
+  const [cardWidth, setCardWidth] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const count = FEATURED_SPEAKERS.length;
+  const PEEK = 80;
+  const GAP = 20;
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const measure = () => setCardWidth(el.clientWidth - PEEK);
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const goTo = (i: number) => {
+    setIdx(i);
+    if (!trackRef.current) return;
+    trackRef.current.scrollTo({ left: i * (cardWidth + GAP), behavior: "smooth" });
+  };
+
+  return (
+    <div className={`mb-16 transition-opacity duration-300 ${cardWidth ? "opacity-100" : "opacity-0"}`}>
+      <div
+        ref={trackRef}
+        className="carousel-track flex overflow-x-scroll"
+        style={{ gap: GAP, scrollbarWidth: "none", scrollSnapType: "x mandatory" }}
+      >
+        {FEATURED_SPEAKERS.map((s) => (
+          <div
+            key={s.name}
+            style={{ width: cardWidth, minWidth: cardWidth, flexShrink: 0, scrollSnapAlign: "start" }}
+            className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-card via-card to-night/60 p-8 sm:p-12"
+          >
+            <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-gradient-sunset opacity-20 blur-3xl pointer-events-none" />
+            <div className="relative grid lg:grid-cols-12 gap-10 items-center">
+              <div className="lg:col-span-8 order-2 lg:order-1">
+                <div className="inline-block text-[10px] uppercase tracking-[0.3em] px-3 py-1.5 rounded-full bg-gradient-sunset text-primary-foreground mb-5 font-semibold">
+                  ★ Featured Speaker
+                </div>
+                <h3 className="font-display text-3xl sm:text-5xl lg:text-6xl mb-3">{s.name}</h3>
+                <p className="text-base sm:text-xl text-sand mb-6">{s.title}</p>
+                <div className="text-[10px] uppercase tracking-[0.25em] text-sunset mb-2 font-semibold">Session</div>
+                <h4 className="font-display text-2xl sm:text-3xl leading-snug mb-4">{s.sessionTitle}</h4>
+                <p className="text-muted-foreground text-lg leading-relaxed">{s.sessionDesc}</p>
+              </div>
+              <div className="lg:col-span-4 order-1 lg:order-2">
+                <div className="aspect-square max-w-[240px] mx-auto lg:ml-auto lg:mr-0 rounded-2xl relative overflow-hidden shadow-glow ring-1 ring-white/10">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={s.img} alt={s.imgAlt} className="absolute inset-0 w-full h-full object-cover" />
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Controls */}
+      <div className="flex items-center justify-between mt-5">
+        <div className="flex gap-2">
+          {FEATURED_SPEAKERS.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              aria-label={`Show speaker ${i + 1}`}
+              className={`h-1.5 rounded-full transition-all ${i === idx ? "w-8 bg-sunset" : "w-1.5 bg-white/30 hover:bg-white/60"}`}
+            />
+          ))}
+        </div>
+        <div className="flex gap-2">
+          <button
+            onClick={() => goTo(Math.max(0, idx - 1))}
+            disabled={idx === 0}
+            aria-label="Previous speaker"
+            className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground/60 hover:text-foreground hover:border-sunset transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
+          >
+            ←
+          </button>
+          <button
+            onClick={() => goTo(Math.min(count - 1, idx + 1))}
+            disabled={idx === count - 1}
+            aria-label="Next speaker"
+            className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground/60 hover:text-foreground hover:border-sunset transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
+          >
+            →
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function GhostCTA({ children, href }: { children: React.ReactNode; href: string }) {
@@ -541,43 +654,13 @@ export default function SummitPage() {
               </div>
             </div>
 
-            {/* Featured speaker — Ian Heller */}
-            <div className="mb-16 relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-card via-card to-night/60 p-8 sm:p-12">
-              <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-gradient-sunset opacity-20 blur-3xl" />
-              <div className="relative grid lg:grid-cols-12 gap-10 items-center">
-                <div className="lg:col-span-8 order-2 lg:order-1">
-                  <div className="inline-block text-[10px] uppercase tracking-[0.3em] px-3 py-1.5 rounded-full bg-gradient-sunset text-primary-foreground mb-5 font-semibold">
-                    ★ Featured Speaker
-                  </div>
-                  <h3 className="font-display text-3xl sm:text-5xl lg:text-6xl mb-3">Ian Heller</h3>
-                  <p className="text-base sm:text-xl text-sand mb-6">Chief Strategy Officer, Distribution Strategy Group</p>
-                  <div className="text-[10px] uppercase tracking-[0.25em] text-sunset mb-2 font-semibold">Session</div>
-                  <h4 className="font-display text-2xl sm:text-3xl leading-snug mb-4">
-                    Your Website Is Bigger Than You Think: Attribution, Disruption, and the ROI Case Your Leadership Will Actually Believe
-                  </h4>
-                  <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-                    Ian Heller — Chief Strategy Officer of Distribution Strategy Group and a four-time VP of
-                    Marketing in distribution — unveils an attribution method that consistently surfaces 4–12x
-                    more revenue than the shopping cart alone, why the growth of Home Depot, Amazon, QXO,
-                    Sonepar, and Grainger makes closing the capabilities gap urgent, and how to set marketing
-                    goals — and earn the investment — that your leadership will actually believe.
-                  </p>
-                </div>
-                <div className="lg:col-span-4 order-1 lg:order-2">
-                  <div className="aspect-square max-w-[240px] mx-auto lg:ml-auto lg:mr-0 rounded-2xl relative overflow-hidden shadow-glow ring-1 ring-white/10">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={ianHeller} alt="Ian Heller, Chief Strategy Officer at Distribution Strategy Group" className="absolute inset-0 w-full h-full object-cover" />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <FeaturedSpeakerCarousel />
 
             {/* Guest speakers */}
             <div className="mb-10">
               <div className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-6">Guest Speakers</div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
                 {[
-                  { n: "Jameel Dharsee", r: "Sr. Director of eCommerce, MRC Global", img: "/customer-summit/speaker-jameel-dharsee.jpg" },
                   // { n: "Robert Connelly", r: "Technology Marketing & Franchisee Communications Manager, The UPS Store", img: "/customer-summit/speaker-robert-connelly.jpg" },
                   { n: "Martin Balaam", r: "CEO & Founder, Pimberly", img: "/customer-summit/speaker-martin-balaam.jpg" },
                   { n: "Radu Munteanu", r: "Founder, Luminos Labs", img: "/customer-summit/speaker-radu-munteanu.png" },

@@ -40,6 +40,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${archivoBlack.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
+      <Script src="//js.hs-scripts.com/3495651.js" id="hs-script-loader" strategy="afterInteractive" />
       <Script src="https://www.googletagmanager.com/gtag/js?id=G-W36G1ZM69Z" strategy="afterInteractive" />
       <Script id="ga4-init" strategy="afterInteractive">{`
         window.dataLayer = window.dataLayer || [];
