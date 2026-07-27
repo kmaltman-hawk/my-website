@@ -577,10 +577,9 @@ export default function SummitPage() {
                   preview: "Training · Roundtables · Poolside Closing Party",
                   sessions: [
                     { time: "8:00 – 9:00 AM", title: "Networking Breakfast", tag: "Networking" },
-                    { time: "9:00 – 9:30 AM", title: "HawkSearch Trivia", tag: "Social" },
-                    { time: "9:30 – 10:30 AM", title: "Hands-On Training Session 1 — Topic TBA", tag: "Training" },
-                    { time: "9:30 – 10:30 AM", title: "Hands-On Training Session 2 — Topic TBA", tag: "Training" },
-                    { time: "10:30 – 11:00 AM", title: "HawkSearch Customer Presentation: TBA", tag: "Presentation" },
+                    { time: "9:00 – 9:30 AM", title: "Imagining the Assistant Presentation Layer", tag: "Presentation" },
+                    { time: "9:30 – 10:30 AM", title: "Diving Head-First into a Data Lake", tag: "Training" },
+                    { time: "10:30 – 11:00 AM", title: "Maximizing your implementation & service offering", tag: "Presentation" },
                     { time: "11:00 – 11:30 AM", title: "Break (Coffee & Snacks)", tag: "Break" },
                     { time: "11:30 AM – 12:00 PM", title: "Assistants: Live! Customer Case Study", tag: "Case Study" },
                     { time: "12:00 – 1:00 PM", title: "Roundtable Takeaways", tag: "Session" },
