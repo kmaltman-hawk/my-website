@@ -20,6 +20,7 @@ const summitEnergy = "/customer-summit/summit-reception.jpg";
 const hawksearchLogo = "/customer-summit/hawksearch-logo.png";
 
 const EVENT_DATE = new Date("2026-10-21T09:00:00-07:00");
+const WEBINAR_URL = "https://www.hawksearch.com/webinar/what-to-expect-hawksearch-customer-summit-2026";
 
 function useCountdown(target: Date) {
   const [now, setNow] = useState<number | null>(null);
@@ -339,8 +340,20 @@ export default function SummitPage() {
           {/* Pink-tinted gradient overlay to tie into the summit branding */}
           <div className="absolute inset-0 bg-gradient-to-b from-[oklch(0.22_0.10_320/0.75)] via-[oklch(0.18_0.06_290/0.45)] to-[oklch(0.14_0.05_285/0.92)]" />
 
+          {/* Webinar promo banner */}
+          <a
+            href={WEBINAR_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="fixed top-0 left-0 right-0 z-[60] flex items-center justify-center gap-2 bg-gradient-sunset px-4 py-2 text-center text-xs sm:text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
+          >
+            <span className="hidden sm:inline">🎙️ Free webinar —</span>
+            <span>What to Expect at HawkSearch Customer Summit &apos;26</span>
+            <span aria-hidden>→</span>
+          </a>
+
           {/* Sticky Nav */}
-          <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 py-4 bg-night/40 backdrop-blur-md border-b border-white/10">
+          <nav className="fixed top-9 sm:top-10 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 py-4 bg-night/40 backdrop-blur-md border-b border-white/10">
             <a href="https://www.hawksearch.com" target="_blank" rel="noopener noreferrer" className="flex items-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={hawksearchLogo} alt="HawkSearch" className="h-8 w-auto drop-shadow" />
@@ -369,7 +382,7 @@ export default function SummitPage() {
           </nav>
 
           {/* Hero content — badge left / details right on desktop */}
-          <div className="relative z-10 flex-1 flex items-center px-6 lg:px-16 pt-24 pb-20 max-w-7xl mx-auto w-full">
+          <div className="relative z-10 flex-1 flex items-center px-6 lg:px-16 pt-32 sm:pt-36 pb-20 max-w-7xl mx-auto w-full">
             <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
               {/* Hero title image */}
