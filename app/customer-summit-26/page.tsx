@@ -560,7 +560,7 @@ export default function SummitPage() {
                     { time: "", title: "", tag: "Track Columns" },
                     { time: "11:00 AM – 12:00 PM", tag: "Concurrent", tracks: { main: [{ title: "Your Website Is Bigger Than You Think: Attribution, Disruption, and the ROI Case Your Leadership Will Actually Believe — Ian Heller, Distribution Strategy Group", tag: "Keynote" }], dev: [{ title: "Agentic Data: Ingesting/Scraping PDF Data", tag: "Dev Track" }] } },
                     { time: "12:00 – 1:00 PM", tag: "Concurrent", tracks: { main: [{ title: "Lunch", tag: "Break" }], dev: [{ title: "Lunch", tag: "Break" }] } },
-                    { time: "1:00 – 2:00 PM", tag: "Concurrent", tracks: { main: [{ title: "Luminos Labs Presentation", tag: "Sponsor" }, { title: "Panel Discussion with Shopware and Pimberly", tag: "Panel" }], dev: [{ title: "Agentic UX: Tooling, Endpoints, Styling, Prompting", tag: "Dev Track" }] } },
+                    { time: "1:00 – 2:00 PM", tag: "Concurrent", tracks: { main: [{ title: "Luminos Labs Presentation", tag: "Sponsor", time: "1:00 – 1:30 PM" }, { title: "Panel Discussion with Shopware, Pimberly, and NAW", tag: "Panel", time: "1:30 – 2:00 PM" }], dev: [{ title: "Agentic UX: Tooling, Endpoints, Styling, Prompting", tag: "Dev Track" }] } },
                     { time: "2:00 – 2:30 PM", tag: "Concurrent", tracks: { main: [{ title: "HawkSearch Training: Agentic Engineering", tag: "Training" }], dev: [{ title: "Core HawkSearch: Mastering Backend API's (Mapping, Hierarchy & More)", tag: "Dev Track" }] } },
                     { time: "2:30 – 3:00 PM", tag: "Concurrent", tracks: { main: [{ title: "HawkSearch Customer Presentation: TBA", tag: "Presentation" }], dev: [{ title: "Core HawkSearch: Forgotten UX (Visual Facets, Instant Engage, Autocomplete)", tag: "Dev Track" }] } },
                     { time: "3:00 – 3:30 PM", title: "Networking Break With Sponsors", tag: "Networking" },
@@ -634,7 +634,10 @@ export default function SummitPage() {
                                 <div className="rounded-xl px-4 py-3 border border-border/60 bg-white/5 space-y-2">
                                   {s.tracks.main.map((m: any, j: number) => (
                                     <div key={j} className="flex items-start justify-between gap-2">
-                                      <span className="text-sm font-medium flex-1">{m.title}</span>
+                                      <div className="flex-1">
+                                        {m.time && <div className="text-[10px] text-muted-foreground tabular-nums mb-0.5">{m.time}</div>}
+                                        <span className="text-sm font-medium">{m.title}</span>
+                                      </div>
                                       <span className={`text-[10px] uppercase tracking-[0.2em] px-2 py-0.5 rounded-full shrink-0 ${tagStyle(m.tag)}`}>{m.tag}</span>
                                     </div>
                                   ))}
