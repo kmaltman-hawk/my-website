@@ -345,7 +345,7 @@ export default function SummitPage() {
             href={WEBINAR_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="fixed top-0 left-0 right-0 z-[60] flex items-center justify-center gap-2 bg-gradient-dusk px-4 py-2 text-center text-xs sm:text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
+            className="fixed top-0 left-0 right-0 z-[60] flex items-center justify-center gap-2 bg-night/80 backdrop-blur-md border-b border-white/10 px-4 py-2 text-center text-xs sm:text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
           >
             <span className="hidden sm:inline">🎙️ Upcoming webinar — Tue, Aug 11 @ 12PM ET —</span>
             <span className="sm:hidden">🎙️ Upcoming webinar, Aug 11 —</span>
