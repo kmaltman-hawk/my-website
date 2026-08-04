@@ -951,15 +951,15 @@ export default function SummitPage() {
               <div className="text-center text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-6 font-semibold">Silver Sponsors</div>
               <div className="flex flex-wrap justify-center items-center gap-12">
                 {[
-                  { src: "/customer-summit/sponsor-conexiom.svg", alt: "Conexiom", className: "h-4" },
-                  { src: "/customer-summit/sponsor-naw.png", alt: "NAW", className: "h-8" },
+                  { src: "/customer-summit/sponsor-conexiom.svg", alt: "Conexiom", className: "h-4", invert: true },
+                  { src: "/customer-summit/sponsor-naw.png", alt: "NAW", className: "h-8", invert: false },
                 ].map((s) => (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
                     key={s.alt}
                     src={s.src}
                     alt={s.alt}
-                    className={`${s.className} w-auto object-contain opacity-70 hover:opacity-100 transition-opacity brightness-0 invert`}
+                    className={`${s.className} w-auto object-contain opacity-70 hover:opacity-100 transition-opacity ${s.invert ? "brightness-0 invert" : ""}`}
                   />
                 ))}
               </div>
