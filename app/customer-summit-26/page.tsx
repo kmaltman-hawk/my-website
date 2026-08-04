@@ -539,11 +539,10 @@ export default function SummitPage() {
                   value: "day-01",
                   day: "Day 01",
                   date: "Wednesday, Oct 21",
-                  preview: "Golf (optional) · Welcome Cocktails · Dinner",
+                  preview: "Golf (optional) · Welcome Cocktails",
                   sessions: [
                     { time: "12:30 – 4:00 PM", title: "Optional: Golf Outing", tag: "Social" },
                     { time: "4:00 – 6:00 PM", title: "Opening Cocktail Gathering", tag: "Social" },
-                    { time: "5:00 – 7:00 PM", title: "Dinner", tag: "Dining" },
                   ],
                 },
                 {
