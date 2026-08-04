@@ -558,10 +558,10 @@ export default function SummitPage() {
                     { time: "10:00 – 10:30 AM", title: "HawkSearch Customer Presentation: MRC Global", tag: "Presentation" },
                     { time: "10:30 – 11:00 AM", title: "Customer Panel Discussion: UPS Store, TBD, TBD", tag: "Panel" },
                     { time: "", title: "", tag: "Track Columns" },
-                    { time: "11:00 AM – 12:00 PM", tag: "Concurrent", tracks: { main: [{ title: "Ian Heller — Distribution Strategy Group", tag: "Keynote" }], dev: [{ title: "Agentic Data: Ingesting/Scraping PDF Data", tag: "Dev Track" }] } },
+                    { time: "11:00 AM – 12:00 PM", tag: "Concurrent", tracks: { main: [{ title: "Your Website Is Bigger Than You Think: Attribution, Disruption, and the ROI Case Your Leadership Will Actually Believe — Ian Heller, Distribution Strategy Group", tag: "Keynote" }], dev: [{ title: "Agentic Data: Ingesting/Scraping PDF Data", tag: "Dev Track" }] } },
                     { time: "12:00 – 1:00 PM", tag: "Concurrent", tracks: { main: [{ title: "Lunch", tag: "Break" }], dev: [{ title: "Lunch", tag: "Break" }] } },
-                    { time: "1:00 – 2:00 PM", tag: "Concurrent", tracks: { main: [{ title: "Luminos Labs Presentation", tag: "Sponsor" }, { title: "Panel Discussion with Shopware and Pimberly", tag: "Panel" }], dev: [{ title: "Agentic UX: Tooling, Endpoints, Styling, Prompting", tag: "Dev Track" }] } },
-                    { time: "2:00 – 2:30 PM", tag: "Concurrent", tracks: { main: [{ title: "HawkSearch Training: Agentic Engineering", tag: "Training" }], dev: [{ title: "Core HawkSearch: Mastering Backend API's (Mapping, Hierarchy & More)", tag: "Dev Track" }] } },
+                    { time: "1:00 – 2:00 PM", tag: "Concurrent", tracks: { main: [{ title: "Luminos Labs Presentation", tag: "Sponsor", time: "1:00 – 1:30 PM" }, { title: "Panel Discussion with Shopware, Pimberly, and NAW", tag: "Panel", time: "1:30 – 2:00 PM" }], dev: [{ title: "Agentic UX: Tooling, Endpoints, Styling, Prompting", tag: "Dev Track" }] } },
+                    { time: "2:00 – 2:30 PM", tag: "Concurrent", tracks: { main: [{ title: "HawkSearch Training - Building your Agentic Persona", tag: "Training" }], dev: [{ title: "Core HawkSearch: Mastering Backend API's (Mapping, Hierarchy & More)", tag: "Dev Track" }] } },
                     { time: "2:30 – 3:00 PM", tag: "Concurrent", tracks: { main: [{ title: "HawkSearch Customer Presentation: TBA", tag: "Presentation" }], dev: [{ title: "Core HawkSearch: Forgotten UX (Visual Facets, Instant Engage, Autocomplete)", tag: "Dev Track" }] } },
                     { time: "3:00 – 3:30 PM", title: "Networking Break With Sponsors", tag: "Networking" },
                     { time: "3:30 – 4:15 PM", title: "HawkSearch Roadmap", tag: "Roadmap" },
@@ -577,10 +577,9 @@ export default function SummitPage() {
                   preview: "Training · Roundtables · Poolside Closing Party",
                   sessions: [
                     { time: "8:00 – 9:00 AM", title: "Networking Breakfast", tag: "Networking" },
-                    { time: "9:00 – 9:30 AM", title: "HawkSearch Trivia", tag: "Social" },
-                    { time: "9:30 – 10:30 AM", title: "Hands-On Training Session 1 — Topic TBA", tag: "Training" },
-                    { time: "9:30 – 10:30 AM", title: "Hands-On Training Session 2 — Topic TBA", tag: "Training" },
-                    { time: "10:30 – 11:00 AM", title: "HawkSearch Customer Presentation: TBA", tag: "Presentation" },
+                    { time: "9:00 – 9:30 AM", title: "Imagining the Assistant Presentation Layer", tag: "Presentation" },
+                    { time: "9:30 – 10:30 AM", title: "Diving Head-First into a Data Lake", tag: "Training" },
+                    { time: "10:30 – 11:00 AM", title: "Maximizing your implementation & service offering", tag: "Presentation" },
                     { time: "11:00 – 11:30 AM", title: "Break (Coffee & Snacks)", tag: "Break" },
                     { time: "11:30 AM – 12:00 PM", title: "Assistants: Live! Customer Case Study", tag: "Case Study" },
                     { time: "12:00 – 1:00 PM", title: "Roundtable Takeaways", tag: "Session" },
@@ -634,7 +633,10 @@ export default function SummitPage() {
                                 <div className="rounded-xl px-4 py-3 border border-border/60 bg-white/5 space-y-2">
                                   {s.tracks.main.map((m: any, j: number) => (
                                     <div key={j} className="flex items-start justify-between gap-2">
-                                      <span className="text-sm font-medium flex-1">{m.title}</span>
+                                      <div className="flex-1">
+                                        {m.time && <div className="text-[10px] text-muted-foreground tabular-nums mb-0.5">{m.time}</div>}
+                                        <span className="text-sm font-medium">{m.title}</span>
+                                      </div>
                                       <span className={`text-[10px] uppercase tracking-[0.2em] px-2 py-0.5 rounded-full shrink-0 ${tagStyle(m.tag)}`}>{m.tag}</span>
                                     </div>
                                   ))}
@@ -948,12 +950,18 @@ export default function SummitPage() {
             <div>
               <div className="text-center text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-6 font-semibold">Silver Sponsors</div>
               <div className="flex flex-wrap justify-center items-center gap-12">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/customer-summit/sponsor-conexiom.svg"
-                  alt="Conexiom"
-                  className="h-4 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity brightness-0 invert"
-                />
+                {[
+                  { src: "/customer-summit/sponsor-conexiom.svg", alt: "Conexiom", className: "h-4", invert: true },
+                  { src: "/customer-summit/sponsor-naw.png", alt: "NAW", className: "h-8", invert: false },
+                ].map((s) => (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    key={s.alt}
+                    src={s.src}
+                    alt={s.alt}
+                    className={`${s.className} w-auto object-contain opacity-70 hover:opacity-100 transition-opacity ${s.invert ? "brightness-0 invert" : ""}`}
+                  />
+                ))}
               </div>
             </div>
           </div>
