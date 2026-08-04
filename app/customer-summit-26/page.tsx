@@ -771,6 +771,10 @@ export default function SummitPage() {
                 { n: "Matt Taglich", r: "Customer Success Director", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/681e037e8ddf308baf2f8a59_Matt%20Taglich.webp" },
                 { n: "Megan Winter", r: "Customer Success Director", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/67cab9355c72084908783eb2_4a4cd7f4d84dad117e963d7b9c758961_Megan%20Winter.webp" },
                 { n: "Carl Prizzi", r: "EVP of Revenue", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/657849d04d352eccf206edc1_carl-prizzi.webp" },
+                { n: "Gosia Dixon", r: "Director of Marketing", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/6a7228a90959c45b5dc0820f_Gosia%20Head%20Shot%202.jpg" },
+                { n: "Alondra Espinal", r: "Principal Consultant", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/6a72295cb8628b2afbf85bf5_T02DCTZ9F-U0ALX8A5U4R-1f62dcea0971-512-1.jpg" },
+                { n: "Kelly Maltman", r: "SVP Marketing", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/6a722c11d78f8da51ca370b7_T02DCTZ9F-U0AN535TXS7-02b66f8dfb74-512.jpg" },
+                { n: "Lorena Mackey", r: "Customer Success Director", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/6a722f4b280e442f0ae19000_655d6483-e948-4e87-8f50-bc143249cdc8.png" },
                 { n: "+ More", r: "Announced soon", img: "" },
               ].map((s) => (
                 <div key={s.n} className="group">
