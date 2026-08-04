@@ -766,7 +766,6 @@ export default function SummitPage() {
                 { n: "John Murcott", r: "EVP Product & Strategy", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/649407a6f29ef61227e133e3_John%20M.webp" },
                 { n: "Carl Prizzi", r: "EVP of Revenue", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/657849d04d352eccf206edc1_carl-prizzi.webp" },
                 { n: "Jeremy LaDuque", r: "SVP Product Marketing", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/6646032435e9e84beebe3691_T02DCTZ9F-U0G9AASQ7-9cc3d5b45a03-512.webp" },
-                { n: "Kelly Maltman", r: "SVP Marketing", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/6a722c11d78f8da51ca370b7_T02DCTZ9F-U0AN535TXS7-02b66f8dfb74-512.jpg" },
                 { n: "Charles Serrini", r: "VP of Services", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/66a10f7b4cda32634b3067f2_Charles%20Serrini.webp" },
                 { n: "Kyle Mitzner", r: "VP Customer Success", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/66a10ea4f2ad7fc0355f4a30_pic-kyle.webp" },
                 { n: "Gosia Dixon", r: "Director of Marketing", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/6a7228a90959c45b5dc0820f_Gosia%20Head%20Shot%202.jpg" },
@@ -775,6 +774,7 @@ export default function SummitPage() {
                 { n: "Lorena Mackey", r: "Customer Success Director", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/6a722f4b280e442f0ae19000_655d6483-e948-4e87-8f50-bc143249cdc8.png" },
                 { n: "Alondra Espinal", r: "Principal Consultant", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/6a72295cb8628b2afbf85bf5_T02DCTZ9F-U0ALX8A5U4R-1f62dcea0971-512-1.jpg" },
                 { n: "Stephanie Brudvik", r: "Senior Business Analyst", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/66a10f681a0f58008dab6126_Stephanie%20Brudvik.webp" },
+                { n: "Kelly Maltman", r: "VP of Marketing", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/6a722c11d78f8da51ca370b7_T02DCTZ9F-U0AN535TXS7-02b66f8dfb74-512.jpg" },
                 { n: "+ More", r: "Announced soon", img: "" },
               ].map((s) => (
                 <div key={s.n} className="group">
