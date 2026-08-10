@@ -443,7 +443,7 @@ export default function SummitPage() {
             {[
               { v: "3", l: "Days of summit" },
               { v: "20+", l: "Speakers & experts" },
-              { v: "150+", l: "eCommerce leaders" },
+              { v: "100+", l: "eCommerce leaders" },
             ].map((s, i) => (
               <div
                 key={s.l}
