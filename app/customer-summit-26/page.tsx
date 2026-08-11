@@ -155,6 +155,176 @@ function HubSpotForm() {
   return <div id="hs-form-target" />;
 }
 
+type HawkAIFlight = {
+  airline: string;
+  departure_time?: string;
+  arrival_time?: string;
+  duration_minutes?: number;
+  price?: number;
+};
+
+async function hawkaiSearchFlights(origin: string, destination: string, date: string): Promise<HawkAIFlight[]> {
+  const params = new URLSearchParams({ origin, destination, date });
+  const response = await fetch(`/api/search-flights?${params.toString()}`);
+  if (!response.ok) {
+    const body = await response.json().catch(() => ({}));
+    throw new Error(body.error || `Flight search failed: ${response.status}`);
+  }
+
+  const data = await response.json();
+  return data.flights || [];
+}
+
+const hawkaiFlightResultsCache: Record<string, { flights?: HawkAIFlight[]; error?: string }> = {};
+function hawkaiFlightCacheKey({ origin, destination, date }: { origin: string; destination: string; date: string }) {
+  return `${origin}|${destination}|${date}`;
+}
+
+async function hawkaiGetLocation(): Promise<{ city: string | null; country: string | null }> {
+  if (!navigator.geolocation) {
+    return { city: null, country: null };
+  }
+
+  try {
+    const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+    const { latitude, longitude } = position.coords;
+
+    const res = await fetch(
+      `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+    );
+    const data = await res.json();
+    return { city: data.city || data.locality || null, country: data.countryName || null };
+  } catch (error) {
+    console.error("Error getting location:", error);
+    return { city: null, country: null };
+  }
+}
+
+function HawkAIAssistant() {
+  useEffect(() => {
+    const init = () => {
+      const w = window as any;
+      if (!w.HawkAI || w.__hawkaiInitialized) return;
+      w.__hawkaiInitialized = true;
+
+      w.HawkAI.Assistant.initialize({
+        apiUrl: "https://assistant-dev.hawksearch.net",
+        accountId: "10783",
+        agentId: "98369868-4724-4b04-aeed-d65114982141",
+        ui: {
+          open: false,
+          styles: ".hawkai-assistant__window { z-index: 301; box-shadow: -4px 4px 10px 2px rgba(0, 0, 0, 0.2); }",
+        },
+        tools: [
+          {
+            name: "search_flights",
+            description:
+              "Search for flights between two airports on a given date to help determine a good flight time to reach the summit. The API only accepts 3-letter IATA airport codes, not city or region names — if the user gives a general location (a city, region, or \"near me\"), first resolve it yourself to the nearest major airport's IATA code before calling this tool.",
+            inputSchema: {
+              type: "object",
+              properties: {
+                origin: {
+                  type: "string",
+                  description:
+                    "Departure airport IATA code, e.g. SFO. If the user gave a city or general location instead of an airport, resolve it to the nearest major airport's IATA code yourself first.",
+                },
+                destination: {
+                  type: "string",
+                  description:
+                    "Arrival airport IATA code, e.g. JFK. If the user gave a city or general location instead of an airport, resolve it to the nearest major airport's IATA code yourself first.",
+                },
+                date: { type: "string", description: "Departure date in YYYY-MM-DD format" },
+              },
+              required: ["origin", "destination", "date"],
+            },
+            execute: async (input: { origin: string; destination: string; date: string }) => {
+              const key = hawkaiFlightCacheKey(input);
+              try {
+                const flights = await hawkaiSearchFlights(input.origin, input.destination, input.date);
+                hawkaiFlightResultsCache[key] = { flights };
+                return { flights };
+              } catch (err: any) {
+                hawkaiFlightResultsCache[key] = { error: err.message };
+                throw err;
+              }
+            },
+            render: ({ input, status }: { input: { origin: string; destination: string; date: string }; status: string }) => {
+              const el = document.createElement("div");
+              el.style.cssText = "border:1px solid #ddd;border-radius:8px;padding:10px 14px;font-size:0.85rem;background:#fafafa;";
+
+              if (status === "pending" || !status) {
+                el.textContent = `Searching flights ${input.origin} → ${input.destination} on ${input.date}...`;
+                return el;
+              }
+
+              const cached = hawkaiFlightResultsCache[hawkaiFlightCacheKey(input)];
+
+              if (status === "error" || cached?.error) {
+                el.style.cssText += "border-color:#e0a0a0;background:#fdf3f3;color:#a33;";
+                el.textContent = `Couldn't find flights ${input.origin} → ${input.destination}. ${cached?.error || "Please try again."}`;
+                return el;
+              }
+
+              const flights = cached?.flights || [];
+              if (!flights.length) {
+                el.textContent = `No flights found for ${input.origin} → ${input.destination} on ${input.date}.`;
+                return el;
+              }
+
+              const header = document.createElement("div");
+              header.style.cssText = "font-weight:600;margin-bottom:8px;";
+              header.textContent = `Flights: ${input.origin} → ${input.destination} · ${input.date}`;
+              el.appendChild(header);
+
+              return el;
+            },
+          },
+        ],
+      });
+
+      (async () => {
+        const location = await hawkaiGetLocation();
+        w.HawkAI.Assistant.setContext({
+          system: `
+<role>You are a helpful assistant for the Bridgeline Summit 2026.</role>
+<summit_info>
+    Start Date: October 21, 2026 - 4pm
+    End Date: October 23, 2026 - 12pm noon
+    Location: Scottsdale Arizona, Scottsdale Resort & Spa
+    Nearest Airport: Phoenix Sky Harbor International Airport (PHX)
+</summit_info>
+<extra>
+    Today is ${new Date().toLocaleDateString()}.
+    User location is ${location.city ? `${location.city}${location.country ? ", " + location.country : ""}` : "not available"}.
+</extra>
+<situations>
+    1. If the user wants the best flight options to reach the summit without extra specifications:
+        - Search for flights the day of the summit and the day before.
+        - Recommend the best flight options based on price, duration, and departure time.
+        - Display the ideal flight in a nice format with airline, departure time, arrival time, duration, and price.
+</situations>
+          `,
+        });
+      })();
+    };
+
+    const existing = document.getElementById("hawkai-assistant-script");
+    if (existing) {
+      init();
+      return;
+    }
+    const script = document.createElement("script");
+    script.id = "hawkai-assistant-script";
+    script.src = "https://cdn.jsdelivr.net/npm/@bridgeline-digital/hawkai-assistant/dist/hawkai-assistant.js";
+    script.onload = init;
+    document.head.appendChild(script);
+  }, []);
+
+  return null;
+}
+
 const FEATURED_SPEAKERS = [
   {
     name: "Ian Heller",
@@ -326,6 +496,7 @@ export default function SummitPage() {
 
   return (
     <div className="summit-wrapper">
+      <HawkAIAssistant />
       <main className="relative overflow-hidden">
         {/* ===== HERO ===== */}
         <section className="relative min-h-screen flex flex-col overflow-hidden">
