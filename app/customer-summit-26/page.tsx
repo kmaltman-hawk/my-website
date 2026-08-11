@@ -155,11 +155,6 @@ function HubSpotForm() {
   return <div id="hs-form-target" />;
 }
 
-// SerpAPI key is exposed client-side here — visible to anyone who views source
-// on this page. Fine for staging only; needs to move behind a server proxy
-// before this is ever merged to a production/public URL.
-const HAWKAI_SERPAPI_KEY = "6989b1a30d5347ce005081aacb184826584c2f3c44428bfeb01eb577e278cfe1";
-
 type HawkAIFlight = {
   airline: string;
   departure_time?: string;
@@ -169,31 +164,15 @@ type HawkAIFlight = {
 };
 
 async function hawkaiSearchFlights(origin: string, destination: string, date: string): Promise<HawkAIFlight[]> {
-  const params = new URLSearchParams({
-    engine: "google_flights",
-    departure_id: origin,
-    arrival_id: destination,
-    outbound_date: date,
-    type: "2", // one-way
-    api_key: HAWKAI_SERPAPI_KEY,
-  });
-
-  const response = await fetch(`https://serpapi.com/search.json?${params.toString()}`);
+  const params = new URLSearchParams({ origin, destination, date });
+  const response = await fetch(`/api/search-flights?${params.toString()}`);
   if (!response.ok) {
-    throw new Error(`SerpAPI request failed: ${response.status}`);
+    const body = await response.json().catch(() => ({}));
+    throw new Error(body.error || `Flight search failed: ${response.status}`);
   }
 
   const data = await response.json();
-  return (data.best_flights || data.other_flights || []).map((flightGroup: any) => {
-    const leg = flightGroup.flights[0];
-    return {
-      airline: leg.airline,
-      departure_time: leg.departure_airport?.time,
-      arrival_time: leg.arrival_airport?.time,
-      duration_minutes: flightGroup.total_duration,
-      price: flightGroup.price,
-    };
-  });
+  return data.flights || [];
 }
 
 const hawkaiFlightResultsCache: Record<string, { flights?: HawkAIFlight[]; error?: string }> = {};
