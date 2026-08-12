@@ -367,6 +367,7 @@ function hawkaiSystemPrompt(location: { city: string | null; country: string | n
         - Search for flights the day of the summit and the day before.
         - Recommend the best flight options based on price, duration, and departure time.
         - Display the ideal flight in a nice format with airline, departure time, arrival time, duration, and price.
+    2. If the user wants information about the hotel, especially if they ask for a specific room block, then provide this link: "https://book.passkey.com/event/51253150/owner/13345015/home".
 </situations>
           `;
 }
