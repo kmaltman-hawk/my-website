@@ -202,6 +202,175 @@ async function hawkaiGetLocation(): Promise<{ city: string | null; country: stri
   }
 }
 
+type AgendaTrackItem = { title: string; tag: string; time?: string };
+type AgendaSession = {
+  time: string;
+  title?: string;
+  tag: string;
+  tracks?: { main: AgendaTrackItem[]; dev: AgendaTrackItem[] };
+};
+type AgendaDay = {
+  value: string;
+  day: string;
+  date: string;
+  preview: string;
+  sessions: AgendaSession[];
+};
+
+// Rendered by the agenda accordion below and serialized into the assistant's
+// context. Radix unmounts collapsed AccordionContent, so these sessions are
+// absent from the DOM until a visitor expands a day — scraping can't see them.
+const AGENDA_DAYS: AgendaDay[] = [
+  {
+    value: "day-01",
+    day: "Day 01",
+    date: "Wednesday, Oct 21",
+    preview: "Golf (optional) · Welcome Cocktails",
+    sessions: [
+      { time: "12:30 – 4:00 PM", title: "Optional: Golf Outing", tag: "Social" },
+      { time: "4:00 – 6:00 PM", title: "Opening Cocktail Gathering", tag: "Social" },
+    ],
+  },
+  {
+    value: "day-02",
+    day: "Day 02",
+    date: "Thursday, Oct 22",
+    preview: "Keynotes · Training · Dev Track · Roadmap · Old Town Social Tour",
+    sessions: [
+      { time: "9:00 AM", title: "Networking Breakfast", tag: "Networking" },
+      { time: "9:00 – 9:30 AM", title: "Opening Keynote", tag: "Keynote" },
+      { time: "9:30 – 10:00 AM", title: "Assistants: Live! Customer Case Study", tag: "Case Study" },
+      { time: "10:00 – 10:30 AM", title: "HawkSearch Customer Presentation: MRC Global", tag: "Presentation" },
+      { time: "10:30 – 11:00 AM", title: "Customer Panel Discussion: UPS Store, TBD, TBD", tag: "Panel" },
+      { time: "", title: "", tag: "Track Columns" },
+      { time: "11:00 AM – 12:00 PM", tag: "Concurrent", tracks: { main: [{ title: "Your Website Is Bigger Than You Think: Attribution, Disruption, and the ROI Case Your Leadership Will Actually Believe — Ian Heller, Distribution Strategy Group", tag: "Keynote" }], dev: [{ title: "Agentic Data: Ingesting/Scraping PDF Data", tag: "Dev Track" }] } },
+      { time: "12:00 – 1:00 PM", tag: "Concurrent", tracks: { main: [{ title: "Lunch", tag: "Break" }], dev: [{ title: "Lunch", tag: "Break" }] } },
+      { time: "1:00 – 2:00 PM", tag: "Concurrent", tracks: { main: [{ title: "Luminos Labs Presentation", tag: "Sponsor", time: "1:00 – 1:30 PM" }, { title: "Panel Discussion with Shopware, Pimberly, and NAW", tag: "Panel", time: "1:30 – 2:00 PM" }], dev: [{ title: "Agentic UX: Tooling, Endpoints, Styling, Prompting", tag: "Dev Track" }] } },
+      { time: "2:00 – 2:30 PM", tag: "Concurrent", tracks: { main: [{ title: "HawkSearch Training - Building your Agentic Persona", tag: "Training" }], dev: [{ title: "Core HawkSearch: Mastering Backend API's (Mapping, Hierarchy & More)", tag: "Dev Track" }] } },
+      { time: "2:30 – 3:00 PM", tag: "Concurrent", tracks: { main: [{ title: "HawkSearch Customer Presentation: TBA", tag: "Presentation" }], dev: [{ title: "Core HawkSearch: Forgotten UX (Visual Facets, Instant Engage, Autocomplete)", tag: "Dev Track" }] } },
+      { time: "3:00 – 3:30 PM", title: "Networking Break With Sponsors", tag: "Networking" },
+      { time: "3:30 – 4:15 PM", title: "HawkSearch Roadmap", tag: "Roadmap" },
+      { time: "4:15 – 5:00 PM", title: "Break", tag: "Break" },
+      { time: "5:30 – 7:30 PM", title: "Old Town Social Tour — Dinner", tag: "Social" },
+      { time: "8:00 – 10:00 PM", title: "Old Town Social Tour — Special Event", tag: "Social" },
+    ],
+  },
+  {
+    value: "day-03",
+    day: "Day 03",
+    date: "Friday, Oct 23",
+    preview: "Training · Case Study · Roundtables",
+    sessions: [
+      { time: "8:00 – 9:00 AM", title: "Networking Breakfast", tag: "Networking" },
+      { time: "9:00 – 9:30 AM", title: "Diving Head-First into a Data Lake", tag: "Training" },
+      { time: "9:30 – 10:30 AM", title: "Maximizing your implementation & service offering", tag: "Presentation" },
+      { time: "10:30 – 11:00 AM", title: "Break (Coffee & Snacks)", tag: "Break" },
+      { time: "11:00 – 11:30 AM", title: "Assistants: Live! Customer Case Study", tag: "Case Study" },
+      { time: "11:30 AM – 12:00 PM", title: "Roundtable Takeaways", tag: "Session" },
+    ],
+  },
+];
+
+type HawkAIWindow = Window & {
+  HawkAI?: { Assistant?: { setContext?: (context: Record<string, unknown>) => void } };
+};
+
+// setContext() replaces the whole context object, so keep a local copy and
+// merge into it — otherwise each caller clobbers the previous one's keys.
+const hawkaiContext: Record<string, unknown> = {};
+function hawkaiUpdateContext(patch: Record<string, unknown>) {
+  Object.assign(hawkaiContext, patch);
+  (window as HawkAIWindow).HawkAI?.Assistant?.setContext?.({ ...hawkaiContext });
+}
+
+// Sending raw markup cost ~12k tokens per request, nearly all of it Tailwind class
+// attributes the model has no use for. Visible copy goes over as text instead.
+const HAWKAI_PAGE_TEXT_MAX_CHARS = 12000;
+
+function hawkaiCapturePageText(): string {
+  const root = document.querySelector("main") ?? document.body;
+  const clone = root.cloneNode(true) as HTMLElement;
+
+  clone
+    .querySelectorAll("script, style, link, noscript, template, svg, iframe")
+    .forEach((el) => el.remove());
+
+  // Break at block boundaries so headings and schedule rows don't run together.
+  clone
+    .querySelectorAll("h1, h2, h3, h4, h5, h6, p, li, tr, section, div, br")
+    .forEach((el) => el.insertAdjacentText("beforebegin", "\n"));
+
+  const text = (clone.textContent ?? "")
+    .replace(/[^\S\n]+/g, " ")
+    .replace(/ ?\n ?/g, "\n")
+    .replace(/\n{2,}/g, "\n")
+    .trim();
+
+  return text.length > HAWKAI_PAGE_TEXT_MAX_CHARS
+    ? `${text.slice(0, HAWKAI_PAGE_TEXT_MAX_CHARS)}…[truncated]`
+    : text;
+}
+
+// The agenda is the most-asked-about content on the page and the one part a DOM
+// scrape cannot reach, so it is serialized from source rather than the document.
+function hawkaiAgendaText(): string {
+  return AGENDA_DAYS.map((day) => {
+    const rows = day.sessions
+      .flatMap((session) => {
+        if (session.tracks) {
+          const line = (track: string, t: AgendaTrackItem) =>
+            `  ${t.time ?? session.time} [${track}] ${t.title} (${t.tag})`;
+          return [
+            ...session.tracks.main.map((t) => line("Main Track", t)),
+            ...session.tracks.dev.map((t) => line("Dev Track", t)),
+          ];
+        }
+        if (!session.title) return [];
+        return [`  ${session.time} ${session.title} (${session.tag})`];
+      })
+      .join("\n");
+    return `${day.day} — ${day.date}\n${rows}`;
+  }).join("\n\n");
+}
+
+// Capture after hydration has replayed and the browser has painted, so we read the
+// settled DOM rather than the server markup.
+function hawkaiWhenSettled(): Promise<void> {
+  return new Promise((resolve) => {
+    const afterPaint = () =>
+      requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+    if (document.readyState === "complete") afterPaint();
+    else window.addEventListener("load", afterPaint, { once: true });
+  });
+}
+
+function hawkaiSystemPrompt(location: { city: string | null; country: string | null }) {
+  return `
+<role>You are a helpful assistant for the Bridgeline Summit 2026.</role>
+<summit_info>
+    Start Date: October 21, 2026 - 4pm
+    End Date: October 23, 2026 - 12pm noon
+    Location: Scottsdale Arizona, Scottsdale Resort & Spa
+    Nearest Airport: Phoenix Sky Harbor International Airport (PHX)
+</summit_info>
+<extra>
+    Today is ${new Date().toLocaleDateString()}.
+    User location is ${location.city ? `${location.city}${location.country ? ", " + location.country : ""}` : "not available"}.
+    The visible copy of the page the user is viewing is in the pageText context
+    field, and the full session schedule is in the agenda field. Treat both as the
+    source of truth for schedule, speaker, venue, and pricing questions instead of
+    answering from memory. The agenda field is complete — do not tell the user to
+    expand a day on the page to see sessions.
+</extra>
+<situations>
+    1. If the user wants the best flight options to reach the summit without extra specifications:
+        - Search for flights the day of the summit and the day before.
+        - Recommend the best flight options based on price, duration, and departure time.
+        - Display the ideal flight in a nice format with airline, departure time, arrival time, duration, and price.
+</situations>
+          `;
+}
+
 function HawkAIAssistant() {
   useEffect(() => {
     const init = () => {
@@ -284,29 +453,24 @@ function HawkAIAssistant() {
         ],
       });
 
+      // Page context and the system prompt go out as soon as the DOM settles.
+      // Deliberately not chained to the geolocation promise below: getCurrentPosition
+      // never settles while the permission prompt sits unanswered, which would
+      // otherwise leave the assistant with no context at all.
+      (async () => {
+        await hawkaiWhenSettled();
+        hawkaiUpdateContext({
+          system: hawkaiSystemPrompt({ city: null, country: null }),
+          pageUrl: window.location.href,
+          pageTitle: document.title,
+          pageText: hawkaiCapturePageText(),
+          agenda: hawkaiAgendaText(),
+        });
+      })();
+
       (async () => {
         const location = await hawkaiGetLocation();
-        w.HawkAI.Assistant.setContext({
-          system: `
-<role>You are a helpful assistant for the Bridgeline Summit 2026.</role>
-<summit_info>
-    Start Date: October 21, 2026 - 4pm
-    End Date: October 23, 2026 - 12pm noon
-    Location: Scottsdale Arizona, Scottsdale Resort & Spa
-    Nearest Airport: Phoenix Sky Harbor International Airport (PHX)
-</summit_info>
-<extra>
-    Today is ${new Date().toLocaleDateString()}.
-    User location is ${location.city ? `${location.city}${location.country ? ", " + location.country : ""}` : "not available"}.
-</extra>
-<situations>
-    1. If the user wants the best flight options to reach the summit without extra specifications:
-        - Search for flights the day of the summit and the day before.
-        - Recommend the best flight options based on price, duration, and departure time.
-        - Display the ideal flight in a nice format with airline, departure time, arrival time, duration, and price.
-</situations>
-          `,
-        });
+        hawkaiUpdateContext({ system: hawkaiSystemPrompt(location) });
       })();
     };
 
@@ -705,56 +869,7 @@ export default function SummitPage() {
             <h2 className="text-4xl sm:text-5xl lg:text-7xl mb-8 sm:mb-16">The <span className="text-gradient-sunset">agenda</span></h2>
 
             <Accordion type="single" collapsible className="space-y-3">
-              {[
-                {
-                  value: "day-01",
-                  day: "Day 01",
-                  date: "Wednesday, Oct 21",
-                  preview: "Golf (optional) · Welcome Cocktails",
-                  sessions: [
-                    { time: "12:30 – 4:00 PM", title: "Optional: Golf Outing", tag: "Social" },
-                    { time: "4:00 – 6:00 PM", title: "Opening Cocktail Gathering", tag: "Social" },
-                  ],
-                },
-                {
-                  value: "day-02",
-                  day: "Day 02",
-                  date: "Thursday, Oct 22",
-                  preview: "Keynotes · Training · Dev Track · Roadmap · Old Town Social Tour",
-                  sessions: [
-                    { time: "9:00 AM", title: "Networking Breakfast", tag: "Networking" },
-                    { time: "9:00 – 9:30 AM", title: "Opening Keynote", tag: "Keynote" },
-                    { time: "9:30 – 10:00 AM", title: "Assistants: Live! Customer Case Study", tag: "Case Study" },
-                    { time: "10:00 – 10:30 AM", title: "HawkSearch Customer Presentation: MRC Global", tag: "Presentation" },
-                    { time: "10:30 – 11:00 AM", title: "Customer Panel Discussion: UPS Store, TBD, TBD", tag: "Panel" },
-                    { time: "", title: "", tag: "Track Columns" },
-                    { time: "11:00 AM – 12:00 PM", tag: "Concurrent", tracks: { main: [{ title: "Your Website Is Bigger Than You Think: Attribution, Disruption, and the ROI Case Your Leadership Will Actually Believe — Ian Heller, Distribution Strategy Group", tag: "Keynote" }], dev: [{ title: "Agentic Data: Ingesting/Scraping PDF Data", tag: "Dev Track" }] } },
-                    { time: "12:00 – 1:00 PM", tag: "Concurrent", tracks: { main: [{ title: "Lunch", tag: "Break" }], dev: [{ title: "Lunch", tag: "Break" }] } },
-                    { time: "1:00 – 2:00 PM", tag: "Concurrent", tracks: { main: [{ title: "Luminos Labs Presentation", tag: "Sponsor", time: "1:00 – 1:30 PM" }, { title: "Panel Discussion with Shopware, Pimberly, and NAW", tag: "Panel", time: "1:30 – 2:00 PM" }], dev: [{ title: "Agentic UX: Tooling, Endpoints, Styling, Prompting", tag: "Dev Track" }] } },
-                    { time: "2:00 – 2:30 PM", tag: "Concurrent", tracks: { main: [{ title: "HawkSearch Training - Building your Agentic Persona", tag: "Training" }], dev: [{ title: "Core HawkSearch: Mastering Backend API's (Mapping, Hierarchy & More)", tag: "Dev Track" }] } },
-                    { time: "2:30 – 3:00 PM", tag: "Concurrent", tracks: { main: [{ title: "HawkSearch Customer Presentation: TBA", tag: "Presentation" }], dev: [{ title: "Core HawkSearch: Forgotten UX (Visual Facets, Instant Engage, Autocomplete)", tag: "Dev Track" }] } },
-                    { time: "3:00 – 3:30 PM", title: "Networking Break With Sponsors", tag: "Networking" },
-                    { time: "3:30 – 4:15 PM", title: "HawkSearch Roadmap", tag: "Roadmap" },
-                    { time: "4:15 – 5:00 PM", title: "Break", tag: "Break" },
-                    { time: "5:30 – 7:30 PM", title: "Old Town Social Tour — Dinner", tag: "Social" },
-                    { time: "8:00 – 10:00 PM", title: "Old Town Social Tour — Special Event", tag: "Social" },
-                  ],
-                },
-                {
-                  value: "day-03",
-                  day: "Day 03",
-                  date: "Friday, Oct 23",
-                  preview: "Training · Case Study · Roundtables",
-                  sessions: [
-                    { time: "8:00 – 9:00 AM", title: "Networking Breakfast", tag: "Networking" },
-                    { time: "9:00 – 9:30 AM", title: "Diving Head-First into a Data Lake", tag: "Training" },
-                    { time: "9:30 – 10:30 AM", title: "Maximizing your implementation & service offering", tag: "Presentation" },
-                    { time: "10:30 – 11:00 AM", title: "Break (Coffee & Snacks)", tag: "Break" },
-                    { time: "11:00 – 11:30 AM", title: "Assistants: Live! Customer Case Study", tag: "Case Study" },
-                    { time: "11:30 AM – 12:00 PM", title: "Roundtable Takeaways", tag: "Session" },
-                  ],
-                },
-              ].map((dayBlock) => (
+              {AGENDA_DAYS.map((dayBlock) => (
                 <AccordionItem
                   key={dayBlock.value}
                   value={dayBlock.value}
