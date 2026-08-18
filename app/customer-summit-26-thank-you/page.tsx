@@ -103,14 +103,29 @@ export default function ThankYouPage() {
         <div className="absolute inset-0 bg-gradient-dusk opacity-90" />
         <div className="absolute inset-0" style={{ backgroundImage: "var(--gradient-radial-glow)" }} />
 
-        <header className="relative px-6 lg:px-12 py-6">
-          <a href="https://www.hawksearch.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center">
+        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 py-4 bg-night/40 backdrop-blur-md border-b border-white/10">
+          <a href="https://www.hawksearch.com" target="_blank" rel="noopener noreferrer" className="flex items-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={hawksearchLogo} alt="HawkSearch" className="h-8 w-auto drop-shadow" />
           </a>
-        </header>
+          <div className="hidden md:flex items-center gap-1">
+            {[
+              { label: "Agenda", href: "/customer-summit-26#agenda" },
+              { label: "Speakers", href: "/customer-summit-26#speakers" },
+              { label: "Hotel", href: "/customer-summit-26#hotel" },
+            ].map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="px-4 py-2 text-sm font-medium text-white/80 hover:text-white transition"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </nav>
 
-        <div className="relative max-w-6xl mx-auto px-6 lg:px-12 py-10 sm:py-16">
+        <div className="relative max-w-6xl mx-auto px-6 lg:px-12 pt-28 pb-10 sm:pt-32 sm:pb-16">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div>
               <div className="text-xs uppercase tracking-[0.3em] text-sand mb-6">For our valued customers</div>
