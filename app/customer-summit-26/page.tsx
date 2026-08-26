@@ -608,6 +608,8 @@ function GhostCTA({ children, href }: { children: React.ReactNode; href: string 
   return (
     <a
       href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white/5 px-8 py-4 font-semibold text-foreground backdrop-blur transition-colors hover:bg-white/10"
     >
       {children}
@@ -1184,7 +1186,7 @@ export default function SummitPage() {
               <p className="text-muted-foreground mb-8">
                 Already registered? Check your inbox — your confirmation includes the discounted group rate.
               </p>
-              <GhostCTA href="#register">Reserve my room block</GhostCTA>
+              <GhostCTA href="https://book.passkey.com/event/51253150/owner/13345015/home">Reserve my room block</GhostCTA>
             </div>
           </div>
         </section>
