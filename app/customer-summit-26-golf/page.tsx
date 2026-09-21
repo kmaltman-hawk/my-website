@@ -7,7 +7,7 @@ import "../customer-summit-26/summit.css";
 const hawksearchLogo = "/customer-summit/hawksearch-logo.png";
 
 const GOLF_FORM_CSS = `
-  body { background: transparent !important; margin: 0; padding: 0; font-family: Inter, system-ui, sans-serif; }
+  body { background: transparent !important; margin: 0; padding: 0; font-family: Inter, system-ui, sans-serif; color: #ffffff !important; }
   fieldset { border: none !important; padding: 0 !important; margin: 0 !important; max-width: 100% !important; }
   .hs-form-field { margin-bottom: 12px !important; }
   label {
@@ -54,7 +54,7 @@ const GOLF_FORM_CSS = `
     color: #1a0a28 !important; cursor: pointer !important; margin-top: 8px !important; display: block !important;
   }
   .hs-button:hover, input[type="submit"]:hover { opacity: 0.9 !important; }
-  .submitted-message { color: #ffffff; text-align: center; padding: 32px 0; font-size: 18px; }
+  .submitted-message, .submitted-message * { color: #ffffff !important; text-align: center; padding: 32px 0; font-size: 18px; }
 `;
 
 function GolfHubSpotForm() {
@@ -154,6 +154,7 @@ export default function GolfPage() {
               <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </a>
+          <div className="text-xs uppercase tracking-[0.2em] text-white/50 mt-4">Limited to 25 spots</div>
         </div>
 
         <div className="relative max-w-4xl mx-auto px-6 lg:px-12 pb-16 sm:pb-20">
@@ -190,7 +191,9 @@ export default function GolfPage() {
         <div id="signup" className="relative max-w-3xl mx-auto px-6 lg:px-12 pb-24 sm:pb-32 scroll-mt-24">
           <div className="text-center mb-8">
             <h2 className="text-3xl sm:text-4xl mb-3">Count Me In</h2>
-            <p className="text-base text-foreground/80">Reserve your spot for the Summit&apos;s optional golf outing.</p>
+            <p className="text-base text-foreground/80">
+              Reserve your spot for the Summit&apos;s optional golf outing — only 25 spots available.
+            </p>
           </div>
           <div
             className="rounded-3xl p-6 sm:p-10"
