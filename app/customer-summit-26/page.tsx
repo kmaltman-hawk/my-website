@@ -958,7 +958,18 @@ export default function SummitPage() {
                             }`}
                           >
                             <div className="text-xs text-muted-foreground tabular-nums shrink-0 w-44">{s.time}</div>
-                            <div className="flex-1 text-sm font-medium">{s.title}</div>
+                            <div className="flex-1 text-sm font-medium">
+                              {s.title === "Optional: Golf Outing" ? (
+                                <a
+                                  href="/customer-summit-26-golf"
+                                  className="underline decoration-dotted underline-offset-4 hover:text-sunset transition-colors"
+                                >
+                                  {s.title} →
+                                </a>
+                              ) : (
+                                s.title
+                              )}
+                            </div>
                             <div className={`text-[10px] uppercase tracking-[0.2em] px-2.5 py-1 rounded-full shrink-0 ${
                               isSocial ? "bg-sunset/20 text-sunset" :
                               s.tag === "Keynote" || s.tag === "Roadmap" ? "bg-gradient-sunset text-primary-foreground" :
