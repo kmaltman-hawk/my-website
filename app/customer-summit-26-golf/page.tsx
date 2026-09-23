@@ -139,7 +139,7 @@ export default function GolfPage() {
           </a>
           <div className="text-xs uppercase tracking-[0.3em] text-sand mb-6">Optional Activity · Customer Summit &apos;26</div>
           <h1 className="text-4xl sm:text-6xl mb-6">
-            Join us for <span className="text-gradient-sunset">18 holes.</span>
+            Join us for a <span className="text-gradient-sunset">round of golf.</span>
           </h1>
           <p className="text-xl text-foreground/90 max-w-2xl mx-auto mb-10">
             Kick off the Summit early with a relaxed round on Wednesday, October 21 at 10:00 AM
