@@ -58,6 +58,8 @@ type HubSpotFormProps = {
   targetId: string;
   portalId?: string;
   region?: string;
+  /** Overrides the default light theme CSS injected into the form document. */
+  css?: string;
 };
 
 export default function HubSpotForm({
@@ -66,6 +68,7 @@ export default function HubSpotForm({
   targetId,
   portalId = "3495651",
   region = "na1",
+  css = FORM_CSS,
 }: HubSpotFormProps) {
   useEffect(() => {
     const onFormReady = ($form: unknown) => {
@@ -74,7 +77,7 @@ export default function HubSpotForm({
       )?.[0]?.ownerDocument;
       if (!doc) return;
       const style = doc.createElement("style");
-      style.textContent = FORM_CSS;
+      style.textContent = css;
       doc.head.appendChild(style);
     };
 
@@ -101,7 +104,7 @@ export default function HubSpotForm({
     script.charset = "utf-8";
     script.onload = create;
     document.head.appendChild(script);
-  }, [formId, sfdcCampaignId, portalId, region, targetId]);
+  }, [formId, sfdcCampaignId, portalId, region, targetId, css]);
 
   return <div id={targetId} />;
 }
