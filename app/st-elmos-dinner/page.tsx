@@ -138,8 +138,8 @@ export default function StElmosDinnerPage() {
             <div className="absolute -bottom-6 -right-6 hidden h-24 w-80 rounded-full bg-[#7d7ee8] lg:block" aria-hidden />
             <div className="relative overflow-hidden rounded-[20px] border-4 border-white/20 shadow-[0_24px_60px_rgba(0,0,30,0.45)] sm:rounded-[32px]">
               <Image
-                src={`${ASSETS}/hero-banner.webp`}
-                alt="HawkSearch — Dinner at St. Elmo's Steak House, B2B eCommerce World Americas, Indianapolis"
+                src={`${ASSETS}/hero-banner-v2.webp`}
+                alt="HawkSearch — Dinner at St. Elmo Steak House, B2B eCommerce World Americas, Indianapolis"
                 width={1774}
                 height={887}
                 priority

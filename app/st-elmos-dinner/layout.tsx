@@ -20,10 +20,10 @@ export const metadata: Metadata = {
     description,
     images: [
       {
-        url: "/st-elmos/og-st-elmos.jpg",
+        url: "/st-elmos/og-st-elmo-v2.jpg",
         width: 1200,
         height: 630,
-        alt: "HawkSearch Dinner at St. Elmo's Steak House — B2B eCommerce World Americas, Indianapolis",
+        alt: "HawkSearch Dinner at St. Elmo Steak House — B2B eCommerce World Americas, Indianapolis",
       },
     ],
   },
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/st-elmos/og-st-elmos.jpg"],
+    images: ["/st-elmos/og-st-elmo-v2.jpg"],
   },
 };
 
