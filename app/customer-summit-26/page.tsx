@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { TrendingUp, Users, Lightbulb, Sparkles } from "lucide-react";
+import { TrendingUp, Users, Lightbulb, Sparkles, Menu, X, ChevronDown } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -20,7 +20,11 @@ const summitEnergy = "/customer-summit/summit-reception.jpg";
 const hawksearchLogo = "/customer-summit/hawksearch-logo.png";
 
 const EVENT_DATE = new Date("2026-10-21T09:00:00-07:00");
-const WEBINAR_URL = "https://www.hawksearch.com/webinar/what-to-expect-hawksearch-customer-summit-2026";
+const NAV_LINKS = [
+  { label: "Agenda", href: "#agenda" },
+  { label: "Speakers", href: "#speakers" },
+  { label: "Hotel", href: "#hotel" },
+];
 
 function useCountdown(target: Date) {
   const [now, setNow] = useState<number | null>(null);
@@ -202,11 +206,12 @@ async function hawkaiGetLocation(): Promise<{ city: string | null; country: stri
   }
 }
 
-type AgendaTrackItem = { title: string; tag: string; time?: string };
+type AgendaTrackItem = { title: string; tag: string; time?: string; description?: string };
 type AgendaSession = {
   time: string;
   title?: string;
   tag: string;
+  description?: string;
   tracks?: { main: AgendaTrackItem[]; dev: AgendaTrackItem[] };
 };
 type AgendaDay = {
@@ -216,6 +221,37 @@ type AgendaDay = {
   preview: string;
   sessions: AgendaSession[];
 };
+
+const FEATURED_SPEAKERS = [
+  {
+    name: "Ian Heller",
+    title: "Chief Strategy Officer, Distribution Strategy Group",
+    img: "/customer-summit/ian-heller.jpg",
+    imgAlt: "Ian Heller, Chief Strategy Officer at Distribution Strategy Group",
+    sessionTitle: "Your Website Is Bigger Than You Think: Attribution, Disruption, and the ROI Case Your Leadership Will Actually Believe",
+    sessionDesc: "Ian Heller — Chief Strategy Officer of Distribution Strategy Group and a four-time VP of Marketing in distribution — unveils an attribution method that consistently surfaces 4–12x more revenue than the shopping cart alone, why the growth of Home Depot, Amazon, QXO, Sonepar, and Grainger makes closing the capabilities gap urgent, and how to set marketing goals — and earn the investment — that your leadership will actually believe.",
+  },
+  {
+    name: "Jameel Dharsee",
+    title: "Sr. Director of eCommerce, MRC Global",
+    img: "/customer-summit/speaker-jameel-dharsee.jpg",
+    imgAlt: "Jameel Dharsee, Sr. Director of eCommerce at MRC Global",
+    sessionTitle: "The Storefront That Knows Everything: HawkSearch as Your ERP Bridge",
+    sessionDesc: "MRC Global did a massive ERP overhaul, and the one source of truth across all of them is actually HawkSearch. Now their internal sales team uses the website to find products, they can see inventory & prices status across all branches and now the website is the internal sales tool.",
+  },
+];
+
+const featuredSession = (name: string) => {
+  const speaker = FEATURED_SPEAKERS.find((sp) => sp.name === name)!;
+  return { title: speaker.sessionTitle, description: speaker.sessionDesc };
+};
+
+const LUMINOS_ABSTRACT = [
+  "Most commerce architectures still start with the assumption that an eCommerce platform belongs at the center. But when product data, search, content, pricing, inventory, payments, fulfillment, and customer data already live in specialized systems, that assumption is worth challenging.",
+  "In this session, Radu Munteanu, Founder and CEO of Luminos Labs, will explore what a truly composable commerce architecture looks like when there is no traditional eCommerce platform at all. Instead of buying a large package of overlapping capabilities, the architecture connects the systems that already do their jobs well and builds only the commerce capabilities the business actually needs.",
+  "The same principle applies to delivery. Fewer platforms should mean fewer integrations, less duplicated logic, less vendor lock-in, and lower operating complexity. And leaner architecture should be matched by leaner teams, without unnecessary project roles, handoffs, meetings, or process.",
+  "The result is a different way to think about commerce: start with the business capabilities you need, keep only the technology and activities that create value, and own the logic that makes your business unique.",
+].join("\n\n");
 
 // Rendered by the agenda accordion below and serialized into the assistant's
 // context. Radix unmounts collapsed AccordionContent, so these sessions are
@@ -228,45 +264,55 @@ const AGENDA_DAYS: AgendaDay[] = [
     preview: "Golf (optional) · Welcome Cocktails",
     sessions: [
       { time: "12:30 – 4:00 PM", title: "Optional: Golf Outing", tag: "Social" },
-      { time: "4:00 – 6:00 PM", title: "Opening Cocktail Gathering", tag: "Social" },
+      { time: "4:00 – 6:00 PM", title: "Opening Cocktail Gathering — Hosted by Conexiom", tag: "Social" },
     ],
   },
   {
     value: "day-02",
     day: "Day 02",
     date: "Thursday, Oct 22",
-    preview: "Keynotes · Training · Dev Track · Roadmap · Old Town Social Tour",
+    preview: "Keynotes · Training · Dev Track · Roadmap · Dinner in Old Town",
     sessions: [
       { time: "9:00 AM", title: "Networking Breakfast", tag: "Networking" },
       { time: "9:00 – 9:30 AM", title: "Opening Keynote", tag: "Keynote" },
-      { time: "9:30 – 10:00 AM", title: "Assistants: Live! Customer Case Study", tag: "Case Study" },
-      { time: "10:00 – 10:30 AM", title: "HawkSearch Customer Presentation: MRC Global", tag: "Presentation" },
-      { time: "10:30 – 11:00 AM", title: "Customer Panel Discussion", tag: "Panel" },
+      { time: "9:30 – 10:00 AM", title: "The Road to Agentic Commerce: Oriental Trading’s Launch Story", tag: "Case Study" },
+      { time: "10:00 – 10:30 AM", title: `${featuredSession("Jameel Dharsee").title} — Jameel Dharsee, MRC Global`, description: featuredSession("Jameel Dharsee").description, tag: "Presentation" },
+      { time: "10:30 – 11:00 AM", title: "Diving Head-First into a Data Lake (Intelligent Insights)", tag: "Panel" },
       { time: "", title: "", tag: "Track Columns" },
-      { time: "11:00 AM – 12:00 PM", tag: "Concurrent", tracks: { main: [{ title: "Your Website Is Bigger Than You Think: Attribution, Disruption, and the ROI Case Your Leadership Will Actually Believe — Ian Heller, Distribution Strategy Group", tag: "Keynote" }], dev: [{ title: "Agentic Data: Ingesting/Scraping PDF Data", tag: "Dev Track" }] } },
+      { time: "11:00 AM – 12:00 PM", tag: "Concurrent", tracks: { main: [{ title: `${featuredSession("Ian Heller").title} — Ian Heller, Distribution Strategy Group`, description: featuredSession("Ian Heller").description, tag: "Keynote" }], dev: [{ title: "Agentic Configurations", tag: "Dev Track" }] } },
       { time: "12:00 – 1:00 PM", tag: "Concurrent", tracks: { main: [{ title: "Lunch", tag: "Break" }], dev: [{ title: "Lunch", tag: "Break" }] } },
-      { time: "1:00 – 2:00 PM", tag: "Concurrent", tracks: { main: [{ title: "Luminos Labs Presentation", tag: "Sponsor", time: "1:00 – 1:30 PM" }, { title: "Panel Discussion with Shopware, Pimberly, and NAW", tag: "Panel", time: "1:30 – 2:00 PM" }], dev: [{ title: "Agentic UX: Tooling, Endpoints, Styling, Prompting", tag: "Dev Track" }] } },
-      { time: "2:00 – 2:30 PM", tag: "Concurrent", tracks: { main: [{ title: "HawkSearch Training - Building your Agentic Persona", tag: "Training" }], dev: [{ title: "Core HawkSearch: Mastering Backend API's (Mapping, Hierarchy & More)", tag: "Dev Track" }] } },
-      { time: "2:30 – 3:00 PM", tag: "Concurrent", tracks: { main: [{ title: "HawkSearch Customer Presentation: TBA", tag: "Presentation" }], dev: [{ title: "Core HawkSearch: Forgotten UX (Visual Facets, Instant Engage, Autocomplete)", tag: "Dev Track" }] } },
+      { time: "1:00 – 3:00 PM", tag: "Concurrent", tracks: {
+        main: [
+          { title: "What If You Didn’t Need an eCommerce Platform? — Radu Munteanu, Luminos Labs", tag: "Sponsor", time: "1:00 – 1:30 PM", description: LUMINOS_ABSTRACT },
+          { title: "From Hours to Outcomes - Rethinking Professional Services", tag: "Presentation", time: "1:30 – 2:00 PM" },
+          { title: "Partner Panel Discussion with Shopware, Groove, and Ollion", tag: "Panel", time: "2:00 – 2:30 PM" },
+          { title: "AMA with True Value & Do it Best", tag: "Presentation", time: "2:30 – 3:00 PM" },
+        ],
+        dev: [
+          { title: "Agentic Enablement", tag: "Dev Track", time: "1:00 – 1:30 PM" },
+          { title: "Report Builder - Analytics", tag: "Dev Track", time: "1:30 – 2:30 PM" },
+        ],
+      } },
       { time: "3:00 – 3:30 PM", title: "Networking Break With Sponsors", tag: "Networking" },
-      { time: "3:30 – 4:15 PM", title: "HawkSearch Roadmap", tag: "Roadmap" },
-      { time: "4:15 – 5:00 PM", title: "Break", tag: "Break" },
-      { time: "5:30 – 7:30 PM", title: "Old Town Social Tour — Dinner", tag: "Social" },
-      { time: "8:00 – 10:00 PM", title: "Old Town Social Tour — Special Event", tag: "Social" },
+      { time: "3:30 – 4:00 PM", title: "HawkSearch Roadmap", tag: "Roadmap" },
+      { time: "4:00 – 4:30 PM", title: "Lightning Roundtables", tag: "Session" },
+      { time: "4:30 – 5:30 PM", title: "Break", tag: "Break" },
+      { time: "5:30 – 8:00 PM", title: "Dinner in Old Town at Culinary Dropout", tag: "Social" },
     ],
   },
   {
     value: "day-03",
     day: "Day 03",
     date: "Friday, Oct 23",
-    preview: "Training · Case Study · Roundtables",
+    preview: "Case Studies · Partner Panel · Trivia & Closing",
     sessions: [
       { time: "8:00 – 9:00 AM", title: "Networking Breakfast", tag: "Networking" },
-      { time: "9:00 – 9:30 AM", title: "Diving Head-First into a Data Lake", tag: "Training" },
-      { time: "9:30 – 10:30 AM", title: "Maximizing your implementation & service offering", tag: "Presentation" },
+      { time: "9:00 – 9:30 AM", title: "Top Case Studies of 2026", tag: "Case Study" },
+      { time: "9:30 – 10:00 AM", title: "Partner Panel Discussion with Pimberly, Conexiom, and NAW", tag: "Panel" },
+      { time: "10:00 – 10:30 AM", title: "HawkSearch Dashboard Overhaul", tag: "Presentation" },
       { time: "10:30 – 11:00 AM", title: "Break (Coffee & Snacks)", tag: "Break" },
-      { time: "11:00 – 11:30 AM", title: "Assistants: Live! Customer Case Study", tag: "Case Study" },
-      { time: "11:30 AM – 12:00 PM", title: "Roundtable Takeaways", tag: "Session" },
+      { time: "11:00 – 11:30 AM", title: "HawkSearch Trivia & Closing Ceremony", tag: "Social" },
+      { time: "11:30 AM – 12:00 PM", title: "Lightning Roundtable Takeaways", tag: "Session" },
     ],
   },
 ];
@@ -319,14 +365,18 @@ function hawkaiAgendaText(): string {
       .flatMap((session) => {
         if (session.tracks) {
           const line = (track: string, t: AgendaTrackItem) =>
-            `  ${t.time ?? session.time} [${track}] ${t.title} (${t.tag})`;
+            `  ${t.time ?? session.time} [${track}] ${t.title} (${t.tag})` +
+            (t.description ? `\n    Abstract: ${t.description.replace(/\n\n/g, " ")}` : "");
           return [
             ...session.tracks.main.map((t) => line("Main Track", t)),
             ...session.tracks.dev.map((t) => line("Dev Track", t)),
           ];
         }
         if (!session.title) return [];
-        return [`  ${session.time} ${session.title} (${session.tag})`];
+        return [
+          `  ${session.time} ${session.title} (${session.tag})` +
+            (session.description ? `\n    Abstract: ${session.description.replace(/\n\n/g, " ")}` : ""),
+        ];
       })
       .join("\n");
     return `${day.day} — ${day.date}\n${rows}`;
@@ -490,25 +540,6 @@ function HawkAIAssistant() {
   return null;
 }
 
-const FEATURED_SPEAKERS = [
-  {
-    name: "Ian Heller",
-    title: "Chief Strategy Officer, Distribution Strategy Group",
-    img: "/customer-summit/ian-heller.jpg",
-    imgAlt: "Ian Heller, Chief Strategy Officer at Distribution Strategy Group",
-    sessionTitle: "Your Website Is Bigger Than You Think: Attribution, Disruption, and the ROI Case Your Leadership Will Actually Believe",
-    sessionDesc: "Ian Heller — Chief Strategy Officer of Distribution Strategy Group and a four-time VP of Marketing in distribution — unveils an attribution method that consistently surfaces 4–12x more revenue than the shopping cart alone, why the growth of Home Depot, Amazon, QXO, Sonepar, and Grainger makes closing the capabilities gap urgent, and how to set marketing goals — and earn the investment — that your leadership will actually believe.",
-  },
-  {
-    name: "Jameel Dharsee",
-    title: "Sr. Director of eCommerce, MRC Global",
-    img: "/customer-summit/speaker-jameel-dharsee.jpg",
-    imgAlt: "Jameel Dharsee, Sr. Director of eCommerce at MRC Global",
-    sessionTitle: "The Storefront That Knows Everything: HawkSearch as Your ERP Bridge",
-    sessionDesc: "MRC Global did a massive ERP overhaul, and the one source of truth across all of them is actually HawkSearch. Now their internal sales team uses the website to find products, they can see inventory & prices status across all branches and now the website is the internal sales tool.",
-  },
-];
-
 function FeaturedSpeakerCarousel() {
   const [idx, setIdx] = useState(0);
   const [cardWidth, setCardWidth] = useState(0);
@@ -656,8 +687,26 @@ function HotelSlideshow({ slides }: { slides: { src: string; alt: string }[] }) 
   );
 }
 
+function AgendaDetails({ text }: { text: string }) {
+  return (
+    <details className="group mt-1.5">
+      <summary className="inline-flex items-center gap-1 cursor-pointer list-none text-xs font-medium text-sand hover:text-white transition [&::-webkit-details-marker]:hidden">
+        <span className="group-open:hidden">Details</span>
+        <span className="hidden group-open:inline">Hide details</span>
+        <ChevronDown className="h-3.5 w-3.5 transition-transform group-open:rotate-180" />
+      </summary>
+      <div className="mt-2 space-y-2 text-xs leading-relaxed text-muted-foreground">
+        {text.split("\n\n").map((p, i) => (
+          <p key={i}>{p}</p>
+        ))}
+      </div>
+    </details>
+  );
+}
+
 export default function SummitPage() {
   const countdown = useCountdown(EVENT_DATE);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <div className="summit-wrapper">
@@ -676,31 +725,15 @@ export default function SummitPage() {
           {/* Pink-tinted gradient overlay to tie into the summit branding */}
           <div className="absolute inset-0 bg-gradient-to-b from-[oklch(0.22_0.10_320/0.75)] via-[oklch(0.18_0.06_290/0.45)] to-[oklch(0.14_0.05_285/0.92)]" />
 
-          {/* Webinar promo banner */}
-          <a
-            href={WEBINAR_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="fixed top-0 left-0 right-0 z-[60] flex items-center justify-center gap-2 bg-night/80 backdrop-blur-md border-b border-white/10 px-4 py-2 text-center text-xs sm:text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
-          >
-            <span className="hidden sm:inline">🎙️ Upcoming webinar — Tue, Aug 11 @ 12PM ET —</span>
-            <span className="sm:hidden">🎙️ Upcoming webinar, Aug 11 —</span>
-            <span>What to Expect at HawkSearch Customer Summit &apos;26</span>
-            <span aria-hidden>→</span>
-          </a>
 
           {/* Sticky Nav */}
-          <nav className="fixed top-9 sm:top-10 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 py-4 bg-night/40 backdrop-blur-md border-b border-white/10">
+          <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 py-4 bg-night/40 backdrop-blur-md border-b border-white/10">
             <a href="https://www.hawksearch.com" target="_blank" rel="noopener noreferrer" className="flex items-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={hawksearchLogo} alt="HawkSearch" className="h-8 w-auto drop-shadow" />
             </a>
             <div className="hidden md:flex items-center gap-1">
-              {[
-                { label: "Agenda", href: "#agenda" },
-                { label: "Speakers", href: "#speakers" },
-                { label: "Hotel", href: "#hotel" },
-              ].map((link) => (
+              {NAV_LINKS.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
@@ -716,10 +749,45 @@ export default function SummitPage() {
                 Register
               </a>
             </div>
+            <button
+              type="button"
+              onClick={() => setMenuOpen((o) => !o)}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+              aria-controls="summit-mobile-menu"
+              className="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-full border border-white/30 bg-white/10 text-white hover:bg-white/20 transition"
+            >
+              {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+
+            {menuOpen && (
+              <div
+                id="summit-mobile-menu"
+                className="md:hidden absolute top-full left-0 right-0 flex flex-col gap-1 px-6 py-4 bg-night/95 backdrop-blur-md border-b border-white/10"
+              >
+                {NAV_LINKS.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="py-3 text-base font-medium text-white/85 hover:text-white border-b border-white/10 transition"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+                <a
+                  href="#register"
+                  onClick={() => setMenuOpen(false)}
+                  className="mt-3 inline-flex items-center justify-center rounded-full bg-white/15 px-5 py-3 text-sm font-semibold text-white border border-white/30 hover:bg-white/25 transition"
+                >
+                  Register
+                </a>
+              </div>
+            )}
           </nav>
 
           {/* Hero content — badge left / details right on desktop */}
-          <div className="relative z-10 flex-1 flex items-center px-6 lg:px-16 pt-32 sm:pt-36 pb-20 max-w-7xl mx-auto w-full">
+          <div className="relative z-10 flex-1 flex items-center px-6 lg:px-16 pt-24 sm:pt-28 pb-20 max-w-7xl mx-auto w-full">
             <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
               {/* Hero title image */}
@@ -920,6 +988,7 @@ export default function SummitPage() {
                                       <div className="flex-1">
                                         {m.time && <div className="text-[10px] text-muted-foreground tabular-nums mb-0.5">{m.time}</div>}
                                         <span className="text-sm font-medium">{m.title}</span>
+                                        {m.description && <AgendaDetails text={m.description} />}
                                       </div>
                                       <span className={`text-[10px] uppercase tracking-[0.2em] px-2 py-0.5 rounded-full shrink-0 ${tagStyle(m.tag)}`}>{m.tag}</span>
                                     </div>
@@ -928,7 +997,11 @@ export default function SummitPage() {
                                 <div className="rounded-xl px-4 py-3 border border-blue-500/20 bg-blue-500/5 space-y-2">
                                   {s.tracks.dev.map((d: any, j: number) => (
                                     <div key={j} className="flex items-start justify-between gap-2">
-                                      <span className="text-sm font-medium flex-1">{d.title}</span>
+                                      <div className="flex-1">
+                                        {d.time && <div className="text-[10px] text-muted-foreground tabular-nums mb-0.5">{d.time}</div>}
+                                        <span className="text-sm font-medium">{d.title}</span>
+                                        {d.description && <AgendaDetails text={d.description} />}
+                                      </div>
                                       <span className={`text-[10px] uppercase tracking-[0.2em] px-2 py-0.5 rounded-full shrink-0 ${tagStyle(d.tag)}`}>{d.tag}</span>
                                     </div>
                                   ))}
@@ -969,6 +1042,7 @@ export default function SummitPage() {
                               ) : (
                                 s.title
                               )}
+                              {s.description && <AgendaDetails text={s.description} />}
                             </div>
                             <div className={`text-[10px] uppercase tracking-[0.2em] px-2.5 py-1 rounded-full shrink-0 ${
                               isSocial ? "bg-sunset/20 text-sunset" :

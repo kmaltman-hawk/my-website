@@ -56,6 +56,7 @@
 .summit-wrapper .bg-night\/40 { background-color: oklch(0.18 0.06 290 / 0.4); }
 .summit-wrapper .bg-night\/60 { background-color: oklch(0.18 0.06 290 / 0.6); }
 .summit-wrapper .bg-night\/80 { background-color: oklch(0.18 0.06 290 / 0.8); }
+.summit-wrapper .bg-night\/95 { background-color: oklch(0.18 0.06 290 / 0.95); }
 .summit-wrapper .from-night\/80 { --tw-gradient-from: oklch(0.18 0.06 290 / 0.8) var(--tw-gradient-from-position); }
 .summit-wrapper .from-night\/40 { --tw-gradient-from: oklch(0.18 0.06 290 / 0.4) var(--tw-gradient-from-position); }
 .summit-wrapper .to-night\/80 { --tw-gradient-to: oklch(0.18 0.06 290 / 0.8) var(--tw-gradient-to-position); }
