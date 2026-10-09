@@ -1140,7 +1140,6 @@ export default function SummitPage() {
                 { n: "Matt Taglich", r: "Customer Success Director", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/681e037e8ddf308baf2f8a59_Matt%20Taglich.webp" },
                 { n: "Jeremy LaDuque", r: "SVP Growth & GTM", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/6646032435e9e84beebe3691_T02DCTZ9F-U0G9AASQ7-9cc3d5b45a03-512.webp" },
                 { n: "Carl Prizzi", r: "EVP of Revenue", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/657849d04d352eccf206edc1_carl-prizzi.webp" },
-                { n: "Charles Serrini", r: "VP of Services", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/66a10f7b4cda32634b3067f2_Charles%20Serrini.webp" },
                 { n: "Kelly Maltman", r: "VP of Marketing", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/6a722c11d78f8da51ca370b7_T02DCTZ9F-U0AN535TXS7-02b66f8dfb74-512.jpg" },
                 { n: "Gosia Dixon", r: "Director of Events", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/6a7228a90959c45b5dc0820f_Gosia%20Head%20Shot%202.jpg" },
                 { n: "John Murcott", r: "EVP Product & Strategy", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/649407a6f29ef61227e133e3_John%20M.webp" },
