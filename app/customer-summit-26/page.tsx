@@ -274,7 +274,7 @@ const AGENDA_DAYS: AgendaDay[] = [
     preview: "Keynotes · Training · Dev Track · Roadmap · Dinner in Old Town",
     sessions: [
       { time: "9:00 AM", title: "Networking Breakfast", tag: "Networking" },
-      { time: "9:00 – 9:30 AM", title: "Opening Keynote", tag: "Keynote" },
+      { time: "9:00 – 9:30 AM", title: "Opening Keynote — Ari Kahn, HawkSearch", tag: "Keynote" },
       { time: "9:30 – 10:00 AM", title: "The Road to Agentic Commerce: Oriental Trading’s Launch Story", tag: "Case Study" },
       { time: "10:00 – 10:30 AM", title: `${featuredSession("Jameel Dharsee").title} — Jameel Dharsee, MRC Global`, description: featuredSession("Jameel Dharsee").description, tag: "Presentation" },
       { time: "10:30 – 11:00 AM", title: "Diving Head-First into a Data Lake (Intelligent Insights)", tag: "Panel" },
