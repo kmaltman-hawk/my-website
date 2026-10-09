@@ -289,18 +289,18 @@ const AGENDA_DAYS: AgendaDay[] = [
       { time: "", title: "", tag: "Track Columns" },
       { time: "11:00 AM – 12:00 PM", tag: "Concurrent", tracks: { main: [{ title: `${featuredSession("Ian Heller").title} — Ian Heller, Distribution Strategy Group`, description: featuredSession("Ian Heller").description, tag: "Keynote" }], dev: [{ title: "Agentic Configurations", tag: "Dev Track" }] } },
       { time: "12:00 – 1:00 PM", tag: "Concurrent", tracks: { main: [{ title: "Lunch", tag: "Break" }], dev: [{ title: "Lunch", tag: "Break" }] } },
-      { time: "1:00 – 3:00 PM", tag: "Concurrent", tracks: {
+      { time: "1:00 – 2:30 PM", tag: "Concurrent", tracks: {
         main: [
           { title: "What If You Didn’t Need an eCommerce Platform? — Radu Munteanu, Luminos Labs", tag: "Sponsor", time: "1:00 – 1:30 PM", description: LUMINOS_ABSTRACT },
           { title: "From Hours to Outcomes - Rethinking Professional Services", tag: "Presentation", time: "1:30 – 2:00 PM" },
           { title: "Partner Panel Discussion with Shopware, The B2B eCommerce Agency, and Ollion", tag: "Panel", time: "2:00 – 2:30 PM" },
-          { title: `${featuredSession("Skiler Lehman").title} — Skiler Lehman`, description: featuredSession("Skiler Lehman").description, tag: "Presentation", time: "2:30 – 3:00 PM" },
         ],
         dev: [
           { title: "Agentic Enablement", tag: "Dev Track", time: "1:00 – 1:30 PM" },
           { title: "Report Builder - Analytics", tag: "Dev Track", time: "1:30 – 2:30 PM" },
         ],
       } },
+      { time: "2:30 – 3:00 PM", title: `${featuredSession("Skiler Lehman").title} — Skiler Lehman`, description: featuredSession("Skiler Lehman").description, tag: "Presentation" },
       { time: "3:00 – 3:30 PM", title: "Networking Break With Sponsors", tag: "Networking" },
       { time: "3:30 – 4:00 PM", title: "HawkSearch Roadmap", tag: "Roadmap" },
       { time: "4:00 – 4:30 PM", title: "Lightning Roundtables", tag: "Session" },
