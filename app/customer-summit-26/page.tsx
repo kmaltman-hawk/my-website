@@ -286,7 +286,7 @@ const AGENDA_DAYS: AgendaDay[] = [
           { title: "What If You Didn’t Need an eCommerce Platform? — Radu Munteanu, Luminos Labs", tag: "Sponsor", time: "1:00 – 1:30 PM", description: LUMINOS_ABSTRACT },
           { title: "From Hours to Outcomes - Rethinking Professional Services", tag: "Presentation", time: "1:30 – 2:00 PM" },
           { title: "Partner Panel Discussion with Shopware, The B2B eCommerce Agency, and Ollion", tag: "Panel", time: "2:00 – 2:30 PM" },
-          { title: "AMA with True Value & Do it Best", tag: "Presentation", time: "2:30 – 3:00 PM" },
+          { title: "AMA with True Value & Do it Best — Skiler Lehman, Do it Best", tag: "Presentation", time: "2:30 – 3:00 PM" },
         ],
         dev: [
           { title: "Agentic Enablement", tag: "Dev Track", time: "1:00 – 1:30 PM" },
@@ -540,97 +540,35 @@ function HawkAIAssistant() {
   return null;
 }
 
-function FeaturedSpeakerCarousel() {
-  const [idx, setIdx] = useState(0);
-  const [cardWidth, setCardWidth] = useState(0);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const count = FEATURED_SPEAKERS.length;
-  const PEEK = 160;
-  const GAP = 20;
-
-  useEffect(() => {
-    const el = trackRef.current;
-    if (!el) return;
-    const measure = () => setCardWidth(el.clientWidth - PEEK);
-    measure();
-    const ro = new ResizeObserver(measure);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  const goTo = (i: number) => {
-    setIdx(i);
-    if (!trackRef.current) return;
-    trackRef.current.scrollTo({ left: i * (cardWidth + GAP), behavior: "smooth" });
-  };
-
+function FeaturedSpeakers() {
   return (
-    <div className={`mb-16 transition-opacity duration-300 ${cardWidth ? "opacity-100" : "opacity-0"}`}>
-      <div
-        ref={trackRef}
-        className="carousel-track flex overflow-x-scroll"
-        style={{ gap: GAP, scrollbarWidth: "none", scrollSnapType: "x mandatory" }}
-      >
-        {FEATURED_SPEAKERS.map((s) => (
-          <div
-            key={s.name}
-            style={{ width: cardWidth, minWidth: cardWidth, flexShrink: 0, scrollSnapAlign: "start" }}
-            className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-card via-card to-night/60 p-8 sm:p-12"
-          >
-            <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-gradient-sunset opacity-20 blur-3xl pointer-events-none" />
-            <div className="relative grid lg:grid-cols-12 gap-10 items-center">
-              <div className="lg:col-span-8 order-2 lg:order-1">
-                <div className="inline-block text-[10px] uppercase tracking-[0.3em] px-3 py-1.5 rounded-full bg-gradient-sunset text-primary-foreground mb-5 font-semibold">
+    <div className="mb-16 grid gap-5 lg:grid-cols-2">
+      {FEATURED_SPEAKERS.map((s) => (
+        <div
+          key={s.name}
+          className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-card via-card to-night/60 p-8 sm:p-10"
+        >
+          <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-gradient-sunset opacity-20 blur-3xl pointer-events-none" />
+          <div className="relative">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-6 mb-8">
+              <div className="w-32 sm:w-36 aspect-square shrink-0 rounded-2xl relative overflow-hidden shadow-glow ring-1 ring-white/10">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={s.img} alt={s.imgAlt} className="absolute inset-0 w-full h-full object-cover" />
+              </div>
+              <div>
+                <div className="inline-block text-[10px] uppercase tracking-[0.3em] px-3 py-1.5 rounded-full bg-gradient-sunset text-primary-foreground mb-4 font-semibold">
                   ★ Featured Speaker
                 </div>
-                <h3 className="font-display text-3xl sm:text-5xl lg:text-6xl mb-3">{s.name}</h3>
-                <p className="text-base sm:text-xl text-sand mb-6">{s.title}</p>
-                <div className="text-[10px] uppercase tracking-[0.25em] text-sunset mb-2 font-semibold">Session</div>
-                <h4 className="font-display text-2xl sm:text-3xl leading-snug mb-4">{s.sessionTitle}</h4>
-                <p className="text-muted-foreground text-lg leading-relaxed">{s.sessionDesc}</p>
-              </div>
-              <div className="lg:col-span-4 order-1 lg:order-2">
-                <div className="aspect-square max-w-[240px] mx-auto lg:ml-auto lg:mr-0 rounded-2xl relative overflow-hidden shadow-glow ring-1 ring-white/10">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={s.img} alt={s.imgAlt} className="absolute inset-0 w-full h-full object-cover" />
-                </div>
+                <h3 className="font-display text-3xl sm:text-4xl mb-2">{s.name}</h3>
+                <p className="text-base sm:text-lg text-sand">{s.title}</p>
               </div>
             </div>
+            <div className="text-[10px] uppercase tracking-[0.25em] text-sunset mb-2 font-semibold">Session</div>
+            <h4 className="font-display text-xl sm:text-2xl leading-snug mb-4">{s.sessionTitle}</h4>
+            <p className="text-muted-foreground leading-relaxed">{s.sessionDesc}</p>
           </div>
-        ))}
-      </div>
-
-      {/* Controls */}
-      <div className="flex items-center justify-between mt-5">
-        <div className="flex gap-2">
-          {FEATURED_SPEAKERS.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => goTo(i)}
-              aria-label={`Show speaker ${i + 1}`}
-              className={`h-1.5 rounded-full transition-all ${i === idx ? "w-8 bg-sunset" : "w-1.5 bg-white/30 hover:bg-white/60"}`}
-            />
-          ))}
         </div>
-        <div className="flex gap-2">
-          <button
-            onClick={() => goTo(Math.max(0, idx - 1))}
-            disabled={idx === 0}
-            aria-label="Previous speaker"
-            className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground/60 hover:text-foreground hover:border-sunset transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
-          >
-            ←
-          </button>
-          <button
-            onClick={() => goTo(Math.min(count - 1, idx + 1))}
-            disabled={idx === count - 1}
-            aria-label="Next speaker"
-            className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground/60 hover:text-foreground hover:border-sunset transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
-          >
-            →
-          </button>
-        </div>
-      </div>
+      ))}
     </div>
   );
 }
@@ -1096,7 +1034,7 @@ export default function SummitPage() {
               </div>
             </div>
 
-            <FeaturedSpeakerCarousel />
+            <FeaturedSpeakers />
 
             {/* Guest speakers */}
             <div className="mb-10">
@@ -1104,8 +1042,8 @@ export default function SummitPage() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
                 {[
                   // { n: "Robert Connelly", r: "Technology Marketing & Franchisee Communications Manager, The UPS Store", img: "/customer-summit/speaker-robert-connelly.jpg" },
-                  { n: "Martin Balaam", r: "CEO & Founder, Pimberly", img: "/customer-summit/speaker-martin-balaam.jpg" },
-                  { n: "Radu Munteanu", r: "Founder, Luminos Labs", img: "/customer-summit/speaker-radu-munteanu.png" },
+                  { n: "Radu Munteanu", r: "Founder & CEO, Luminos Labs", img: "/customer-summit/speaker-radu-munteanu.png" },
+                  { n: "Skiler Lehman", r: "Director of eCommerce, Do it Best", img: "/customer-summit/speaker-skiler-lehman.jpg" },
                 ].map((s) => (
                   <div key={s.n} className="group">
                     <div className="aspect-square rounded-2xl bg-gradient-sunset relative overflow-hidden flex items-center justify-center font-display text-5xl text-primary-foreground transition-transform group-hover:scale-[1.02]">
@@ -1138,12 +1076,15 @@ export default function SummitPage() {
                 { n: "Stephanie Brudvik", r: "Senior Business Analyst", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/66a10f681a0f58008dab6126_Stephanie%20Brudvik.webp" },
                 { n: "Lorena Mackey", r: "Customer Success Director", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/6a722f4b280e442f0ae19000_655d6483-e948-4e87-8f50-bc143249cdc8.png" },
                 { n: "Matt Taglich", r: "Customer Success Director", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/681e037e8ddf308baf2f8a59_Matt%20Taglich.webp" },
-                { n: "Jeremy LaDuque", r: "SVP Product Marketing", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/6646032435e9e84beebe3691_T02DCTZ9F-U0G9AASQ7-9cc3d5b45a03-512.webp" },
+                { n: "Jeremy LaDuque", r: "SVP Growth & GTM", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/6646032435e9e84beebe3691_T02DCTZ9F-U0G9AASQ7-9cc3d5b45a03-512.webp" },
                 { n: "Carl Prizzi", r: "EVP of Revenue", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/657849d04d352eccf206edc1_carl-prizzi.webp" },
-                { n: "Charles Serrini", r: "VP of Services", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/66a10f7b4cda32634b3067f2_Charles%20Serrini.webp" },
                 { n: "Kelly Maltman", r: "VP of Marketing", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/6a722c11d78f8da51ca370b7_T02DCTZ9F-U0AN535TXS7-02b66f8dfb74-512.jpg" },
-                { n: "Gosia Dixon", r: "Director of Marketing", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/6a7228a90959c45b5dc0820f_Gosia%20Head%20Shot%202.jpg" },
+                { n: "Gosia Dixon", r: "Director of Events", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/6a7228a90959c45b5dc0820f_Gosia%20Head%20Shot%202.jpg" },
                 { n: "John Murcott", r: "EVP Product & Strategy", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/649407a6f29ef61227e133e3_John%20M.webp" },
+                { n: "Parinay Rikhy", r: "Product Analytics Lead", img: "/customer-summit/team-parinay-rikhy.jpg" },
+                { n: "Gavin Kearns", r: "VP of Sales & Partnerships", img: "/customer-summit/team-gavin-kearns.png" },
+                { n: "Stephen Leonard", r: "Business Development Representative", img: "/customer-summit/team-stephen-leonard.png" },
+                { n: "Jordan Coffland", r: "Technical Product Manager", img: "/customer-summit/team-jordan-coffland.jpg" },
                 { n: "+ More", r: "Announced soon", img: "" },
               ].map((s) => (
                 <div key={s.n} className="group">
