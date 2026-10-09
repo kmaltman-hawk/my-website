@@ -239,6 +239,14 @@ const FEATURED_SPEAKERS = [
     sessionTitle: "The Storefront That Knows Everything: HawkSearch as Your ERP Bridge",
     sessionDesc: "MRC Global did a massive ERP overhaul, and the one source of truth across all of them is actually HawkSearch. Now their internal sales team uses the website to find products, they can see inventory & prices status across all branches and now the website is the internal sales tool.",
   },
+  {
+    name: "Skiler Lehman",
+    title: "Director of eCommerce, True Value & Do it Best",
+    img: "/customer-summit/speaker-skiler-lehman.jpg",
+    imgAlt: "Skiler Lehman, Director of eCommerce at True Value & Do it Best",
+    sessionTitle: "AMA with True Value & Do it Best",
+    sessionDesc: "Following one of the largest acquisitions in the hardware industry, Do it Best and True Value are focused on delivering seamless product discovery across a growing digital ecosystem. Join Skiler Lehman as he joins us in a Q&A session that digs into how his team is using HawkSearch to improve search, merchandising, and customer experience while supporting growth at scale.",
+  },
 ];
 
 const featuredSession = (name: string) => {
@@ -286,7 +294,7 @@ const AGENDA_DAYS: AgendaDay[] = [
           { title: "What If You Didn’t Need an eCommerce Platform? — Radu Munteanu, Luminos Labs", tag: "Sponsor", time: "1:00 – 1:30 PM", description: LUMINOS_ABSTRACT },
           { title: "From Hours to Outcomes - Rethinking Professional Services", tag: "Presentation", time: "1:30 – 2:00 PM" },
           { title: "Partner Panel Discussion with Shopware, The B2B eCommerce Agency, and Ollion", tag: "Panel", time: "2:00 – 2:30 PM" },
-          { title: "AMA with True Value & Do it Best — Skiler Lehman, Do it Best", tag: "Presentation", time: "2:30 – 3:00 PM" },
+          { title: `${featuredSession("Skiler Lehman").title} — Skiler Lehman`, description: featuredSession("Skiler Lehman").description, tag: "Presentation", time: "2:30 – 3:00 PM" },
         ],
         dev: [
           { title: "Agentic Enablement", tag: "Dev Track", time: "1:00 – 1:30 PM" },
@@ -542,7 +550,7 @@ function HawkAIAssistant() {
 
 function FeaturedSpeakers() {
   return (
-    <div className="mb-16 grid gap-5 lg:grid-cols-2">
+    <div className="mb-16 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
       {FEATURED_SPEAKERS.map((s) => (
         <div
           key={s.name}
@@ -550,13 +558,13 @@ function FeaturedSpeakers() {
         >
           <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-gradient-sunset opacity-20 blur-3xl pointer-events-none" />
           <div className="relative">
-            <div className="flex flex-col sm:flex-row sm:items-center gap-6 mb-8">
-              <div className="w-32 sm:w-36 aspect-square shrink-0 rounded-2xl relative overflow-hidden shadow-glow ring-1 ring-white/10">
+            <div className="flex flex-col gap-5 mb-8">
+              <div className="w-28 sm:w-32 aspect-square shrink-0 rounded-2xl relative overflow-hidden shadow-glow ring-1 ring-white/10">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={s.img} alt={s.imgAlt} className="absolute inset-0 w-full h-full object-cover" />
               </div>
               <div>
-                <div className="inline-block text-[10px] uppercase tracking-[0.3em] px-3 py-1.5 rounded-full bg-gradient-sunset text-primary-foreground mb-4 font-semibold">
+                <div className="inline-block whitespace-nowrap text-[10px] uppercase tracking-[0.3em] px-3 py-1.5 rounded-full bg-gradient-sunset text-primary-foreground mb-4 font-semibold">
                   ★ Featured Speaker
                 </div>
                 <h3 className="font-display text-3xl sm:text-4xl mb-2">{s.name}</h3>
@@ -1043,7 +1051,6 @@ export default function SummitPage() {
                 {[
                   // { n: "Robert Connelly", r: "Technology Marketing & Franchisee Communications Manager, The UPS Store", img: "/customer-summit/speaker-robert-connelly.jpg" },
                   { n: "Radu Munteanu", r: "Founder & CEO, Luminos Labs", img: "/customer-summit/speaker-radu-munteanu.png", badge: "Title Sponsor" },
-                  { n: "Skiler Lehman", r: "Director of eCommerce, Do it Best", img: "/customer-summit/speaker-skiler-lehman.jpg" },
                 ].map((s) => (
                   <div key={s.n} className="group">
                     <div className="aspect-square rounded-2xl bg-gradient-sunset relative overflow-hidden flex items-center justify-center font-display text-5xl text-primary-foreground transition-transform group-hover:scale-[1.02]">
