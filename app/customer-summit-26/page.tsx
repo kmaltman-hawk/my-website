@@ -297,7 +297,7 @@ const AGENDA_DAYS: AgendaDay[] = [
       { time: "3:30 – 4:00 PM", title: "HawkSearch Roadmap", tag: "Roadmap" },
       { time: "4:00 – 4:30 PM", title: "Lightning Roundtables", tag: "Session" },
       { time: "4:30 – 5:30 PM", title: "Break", tag: "Break" },
-      { time: "5:30 – 8:00 PM", title: "Dinner in Old Town at Culinary Dropout", tag: "Social" },
+      { time: "5:30 – 8:00 PM", title: "Dinner in Old Town at Culinary Dropout — Hosted by B2B eCommerce Agency", tag: "Social" },
     ],
   },
   {
