@@ -1105,7 +1105,7 @@ export default function SummitPage() {
                 {[
                   // { n: "Robert Connelly", r: "Technology Marketing & Franchisee Communications Manager, The UPS Store", img: "/customer-summit/speaker-robert-connelly.jpg" },
                   { n: "Martin Balaam", r: "CEO & Founder, Pimberly", img: "/customer-summit/speaker-martin-balaam.jpg" },
-                  { n: "Radu Munteanu", r: "Founder, Luminos Labs", img: "/customer-summit/speaker-radu-munteanu.png" },
+                  { n: "Radu Munteanu", r: "Founder & CEO, Luminos Labs", img: "/customer-summit/speaker-radu-munteanu.png" },
                 ].map((s) => (
                   <div key={s.n} className="group">
                     <div className="aspect-square rounded-2xl bg-gradient-sunset relative overflow-hidden flex items-center justify-center font-display text-5xl text-primary-foreground transition-transform group-hover:scale-[1.02]">
@@ -1138,7 +1138,7 @@ export default function SummitPage() {
                 { n: "Stephanie Brudvik", r: "Senior Business Analyst", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/66a10f681a0f58008dab6126_Stephanie%20Brudvik.webp" },
                 { n: "Lorena Mackey", r: "Customer Success Director", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/6a722f4b280e442f0ae19000_655d6483-e948-4e87-8f50-bc143249cdc8.png" },
                 { n: "Matt Taglich", r: "Customer Success Director", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/681e037e8ddf308baf2f8a59_Matt%20Taglich.webp" },
-                { n: "Jeremy LaDuque", r: "SVP Product Marketing", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/6646032435e9e84beebe3691_T02DCTZ9F-U0G9AASQ7-9cc3d5b45a03-512.webp" },
+                { n: "Jeremy LaDuque", r: "SVP Growth & GTM", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/6646032435e9e84beebe3691_T02DCTZ9F-U0G9AASQ7-9cc3d5b45a03-512.webp" },
                 { n: "Carl Prizzi", r: "EVP of Revenue", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/657849d04d352eccf206edc1_carl-prizzi.webp" },
                 { n: "Charles Serrini", r: "VP of Services", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/66a10f7b4cda32634b3067f2_Charles%20Serrini.webp" },
                 { n: "Kelly Maltman", r: "VP of Marketing", img: "https://cdn.prod.website-files.com/616ef101d9f2a3350a5daaf5/6a722c11d78f8da51ca370b7_T02DCTZ9F-U0AN535TXS7-02b66f8dfb74-512.jpg" },
