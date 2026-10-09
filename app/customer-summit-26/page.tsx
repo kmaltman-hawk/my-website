@@ -1042,7 +1042,7 @@ export default function SummitPage() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
                 {[
                   // { n: "Robert Connelly", r: "Technology Marketing & Franchisee Communications Manager, The UPS Store", img: "/customer-summit/speaker-robert-connelly.jpg" },
-                  { n: "Radu Munteanu", r: "Founder & CEO, Luminos Labs", img: "/customer-summit/speaker-radu-munteanu.png" },
+                  { n: "Radu Munteanu", r: "Founder & CEO, Luminos Labs", img: "/customer-summit/speaker-radu-munteanu.png", badge: "Title Sponsor" },
                   { n: "Skiler Lehman", r: "Director of eCommerce, Do it Best", img: "/customer-summit/speaker-skiler-lehman.jpg" },
                 ].map((s) => (
                   <div key={s.n} className="group">
@@ -1055,6 +1055,11 @@ export default function SummitPage() {
                           <div className="absolute inset-0 bg-night/30 group-hover:bg-night/10 transition-colors" />
                           <span className="relative text-2xl">📷</span>
                         </>
+                      )}
+                      {s.badge && (
+                        <span className="absolute top-3 left-3 text-[10px] uppercase tracking-[0.2em] px-2.5 py-1 rounded-full bg-gradient-sunset text-primary-foreground font-semibold shadow-lg">
+                          ★ {s.badge}
+                        </span>
                       )}
                     </div>
                     <div className="mt-4">
