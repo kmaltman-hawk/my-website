@@ -1096,7 +1096,7 @@ export default function SummitPage() {
                 { n: "Jordan Coffland", r: "Technical Product Manager", img: "/customer-summit/team-jordan-coffland.jpg" },
                 { n: "Parinay Rikhy", r: "Product Analytics Lead", img: "/customer-summit/team-parinay-rikhy.jpg" },
                 { n: "Gavin Kearns", r: "VP of Sales & Partnerships", img: "/customer-summit/team-gavin-kearns.png" },
-                { n: "Stephen Leonard", r: "Business Development Representative", img: "/customer-summit/team-stephen-leonard.png" },
+                { n: "Stephen Leonard", r: "Enterprise Account Executive", img: "/customer-summit/team-stephen-leonard.png" },
                 { n: "+ More", r: "Announced soon", img: "" },
               ].map((s) => (
                 <div key={s.n} className="group">
