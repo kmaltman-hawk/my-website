@@ -285,7 +285,7 @@ const AGENDA_DAYS: AgendaDay[] = [
         main: [
           { title: "What If You Didn’t Need an eCommerce Platform? — Radu Munteanu, Luminos Labs", tag: "Sponsor", time: "1:00 – 1:30 PM", description: LUMINOS_ABSTRACT },
           { title: "From Hours to Outcomes - Rethinking Professional Services", tag: "Presentation", time: "1:30 – 2:00 PM" },
-          { title: "Partner Panel Discussion with Shopware, Groove, and Ollion", tag: "Panel", time: "2:00 – 2:30 PM" },
+          { title: "Partner Panel Discussion with Shopware, The B2B eCommerce Agency, and Ollion", tag: "Panel", time: "2:00 – 2:30 PM" },
           { title: "AMA with True Value & Do it Best", tag: "Presentation", time: "2:30 – 3:00 PM" },
         ],
         dev: [
@@ -297,7 +297,7 @@ const AGENDA_DAYS: AgendaDay[] = [
       { time: "3:30 – 4:00 PM", title: "HawkSearch Roadmap", tag: "Roadmap" },
       { time: "4:00 – 4:30 PM", title: "Lightning Roundtables", tag: "Session" },
       { time: "4:30 – 5:30 PM", title: "Break", tag: "Break" },
-      { time: "5:30 – 8:00 PM", title: "Dinner in Old Town at Culinary Dropout — Hosted by B2B eCommerce Agency", tag: "Social" },
+      { time: "5:30 – 8:00 PM", title: "Dinner in Old Town at Culinary Dropout — Hosted by The B2B eCommerce Agency", tag: "Social" },
     ],
   },
   {
