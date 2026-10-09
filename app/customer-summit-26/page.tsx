@@ -241,10 +241,10 @@ const FEATURED_SPEAKERS = [
   },
   {
     name: "Skiler Lehman",
-    title: "Director of eCommerce, True Value & Do it Best",
+    title: "Director of eCommerce, Do it Best & True Value",
     img: "/customer-summit/speaker-skiler-lehman.jpg",
-    imgAlt: "Skiler Lehman, Director of eCommerce at True Value & Do it Best",
-    sessionTitle: "AMA with True Value & Do it Best",
+    imgAlt: "Skiler Lehman, Director of eCommerce at Do it Best & True Value",
+    sessionTitle: "AMA with Do it Best & True Value",
     sessionDesc: "Following one of the largest acquisitions in the hardware industry, Do it Best and True Value are focused on delivering seamless product discovery across a growing digital ecosystem. Join Skiler Lehman as he joins us in a Q&A session that digs into how his team is using HawkSearch to improve search, merchandising, and customer experience while supporting growth at scale.",
   },
 ];
