@@ -1271,7 +1271,7 @@ export default function SummitPage() {
                     key={s.alt}
                     src={s.src}
                     alt={s.alt}
-                    className="h-10 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity brightness-0 invert"
+                    className="h-9 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity brightness-0 invert"
                   />
                 ))}
               </div>
@@ -1285,8 +1285,11 @@ export default function SummitPage() {
               <div className="text-center text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-6 font-semibold">Silver Sponsors</div>
               <div className="flex flex-wrap justify-center items-center gap-12">
                 {[
-                  { src: "/customer-summit/sponsor-conexiom.svg", alt: "Conexiom", className: "h-4", invert: true },
-                  { src: "/customer-summit/sponsor-naw.png", alt: "NAW", className: "h-8", invert: false },
+                  { src: "/customer-summit/sponsor-conexiom.svg", alt: "Conexiom", className: "h-5", invert: false },
+                  { src: "/customer-summit/sponsor-naw.png", alt: "NAW", className: "h-5", invert: false },
+                  { src: "/customer-summit/sponsor-b2b-ecommerce-agency.svg", alt: "The B2B eCommerce Agency", className: "h-6", invert: false },
+                  { src: "/customer-summit/sponsor-unilog.svg", alt: "Unilog", className: "h-7", invert: false },
+                  { src: "/customer-summit/sponsor-ollion.svg", alt: "Ollion", className: "h-5", invert: true },
                 ].map((s) => (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
