@@ -247,6 +247,14 @@ const FEATURED_SPEAKERS = [
     sessionTitle: "AMA with Do it Best & True Value",
     sessionDesc: "Following one of the largest acquisitions in the hardware industry, Do it Best and True Value are focused on delivering seamless product discovery across a growing digital ecosystem. Join Skiler Lehman as he joins us in a Q&A session that digs into how his team is using HawkSearch to improve search, merchandising, and customer experience while supporting growth at scale.",
   },
+  {
+    name: "Jeff Tannenbaum",
+    title: "Tanner",
+    img: "/customer-summit/speaker-jeff-tannenbaum.jpg",
+    imgAlt: "Jeff Tannenbaum of Tanner",
+    sessionTitle: "Technology Decisions, and Search Data as Executive Intelligence",
+    sessionDesc: "",
+  },
 ];
 
 const featuredSession = (name: string) => {
@@ -271,7 +279,7 @@ const AGENDA_DAYS: AgendaDay[] = [
     date: "Wednesday, Oct 21",
     preview: "Golf (optional) · Welcome Cocktails",
     sessions: [
-      { time: "12:30 – 4:00 PM", title: "Optional: Golf Outing", tag: "Social" },
+      { time: "10:00 AM", title: "Optional: Golf Outing", tag: "Social" },
       { time: "4:00 – 6:00 PM", title: "Opening Cocktail Gathering — Hosted by Conexiom", tag: "Social" },
     ],
   },
@@ -286,9 +294,9 @@ const AGENDA_DAYS: AgendaDay[] = [
       { time: "9:30 – 10:00 AM", title: "The Road to Agentic Commerce: Oriental Trading’s Launch Story", tag: "Case Study" },
       { time: "10:00 – 10:30 AM", title: `${featuredSession("Jameel Dharsee").title} — Jameel Dharsee, MRC Global`, description: featuredSession("Jameel Dharsee").description, tag: "Presentation" },
       { time: "10:30 – 11:00 AM", title: "Diving Head-First into a Data Lake (Intelligent Insights)", tag: "Panel" },
+      { time: "11:00 AM – 12:00 PM", title: `${featuredSession("Ian Heller").title} — Ian Heller, Distribution Strategy Group`, description: featuredSession("Ian Heller").description, tag: "Keynote" },
+      { time: "12:00 – 1:00 PM", title: "Lunch", tag: "Break" },
       { time: "", title: "", tag: "Track Columns" },
-      { time: "11:00 AM – 12:00 PM", tag: "Concurrent", tracks: { main: [{ title: `${featuredSession("Ian Heller").title} — Ian Heller, Distribution Strategy Group`, description: featuredSession("Ian Heller").description, tag: "Keynote" }], dev: [{ title: "Agentic Configurations", tag: "Dev Track" }] } },
-      { time: "12:00 – 1:00 PM", tag: "Concurrent", tracks: { main: [{ title: "Lunch", tag: "Break" }], dev: [{ title: "Lunch", tag: "Break" }] } },
       { time: "1:00 – 2:30 PM", tag: "Concurrent", tracks: {
         main: [
           { title: "What If You Didn’t Need an eCommerce Platform? — Radu Munteanu, Luminos Labs", tag: "Sponsor", time: "1:00 – 1:30 PM", description: LUMINOS_ABSTRACT },
@@ -296,8 +304,8 @@ const AGENDA_DAYS: AgendaDay[] = [
           { title: "Partner Panel Discussion with Shopware, The B2B eCommerce Agency, and Ollion", tag: "Panel", time: "2:00 – 2:30 PM" },
         ],
         dev: [
-          { title: "Agentic Enablement", tag: "Dev Track", time: "1:00 – 1:30 PM" },
-          { title: "Report Builder - Analytics", tag: "Dev Track", time: "1:30 – 2:30 PM" },
+          { title: "Agentic Enablement", tag: "Dev Track", time: "1:00 – 1:45 PM" },
+          { title: "Report Builder - Analytics", tag: "Dev Track", time: "1:45 – 2:30 PM" },
         ],
       } },
       { time: "2:30 – 3:00 PM", title: `${featuredSession("Skiler Lehman").title} — Skiler Lehman`, description: featuredSession("Skiler Lehman").description, tag: "Presentation" },
@@ -312,10 +320,10 @@ const AGENDA_DAYS: AgendaDay[] = [
     value: "day-03",
     day: "Day 03",
     date: "Friday, Oct 23",
-    preview: "Case Studies · Partner Panel · Trivia & Closing",
+    preview: "Featured Session · Partner Panel · Trivia & Closing",
     sessions: [
       { time: "8:00 – 9:00 AM", title: "Networking Breakfast", tag: "Networking" },
-      { time: "9:00 – 9:30 AM", title: "Top Case Studies of 2026", tag: "Case Study" },
+      { time: "9:00 – 9:30 AM", title: `${featuredSession("Jeff Tannenbaum").title} — Jeff Tannenbaum, Tanner`, description: featuredSession("Jeff Tannenbaum").description, tag: "Presentation" },
       { time: "9:30 – 10:00 AM", title: "Partner Panel Discussion with Pimberly, Conexiom, and NAW", tag: "Panel" },
       { time: "10:00 – 10:30 AM", title: "HawkSearch Dashboard Overhaul", tag: "Presentation" },
       { time: "10:30 – 11:00 AM", title: "Break (Coffee & Snacks)", tag: "Break" },
@@ -573,7 +581,7 @@ function FeaturedSpeakers() {
             </div>
             <div className="text-[10px] uppercase tracking-[0.25em] text-sunset mb-2 font-semibold">Session</div>
             <h4 className="font-display text-xl sm:text-2xl leading-snug mb-4">{s.sessionTitle}</h4>
-            <p className="text-muted-foreground leading-relaxed">{s.sessionDesc}</p>
+            {s.sessionDesc && <p className="text-muted-foreground leading-relaxed">{s.sessionDesc}</p>}
           </div>
         </div>
       ))}
