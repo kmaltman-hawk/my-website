@@ -433,7 +433,7 @@ function hawkaiSystemPrompt(location: { city: string | null; country: string | n
         - Search for flights the day of the summit and the day before.
         - Recommend the best flight options based on price, duration, and departure time.
         - Display the ideal flight in a nice format with airline, departure time, arrival time, duration, and price.
-    2. If the user wants information about the hotel, especially if they ask for a specific room block, then provide this link: "https://book.passkey.com/event/51253150/owner/13345015/home".
+    2. If the user asks about the hotel room block, explain that the room block is now closed.
 </situations>
           `;
 }
@@ -586,17 +586,6 @@ function FeaturedSpeakers() {
         </div>
       ))}
     </div>
-  );
-}
-
-function GhostCTA({ children, href }: { children: React.ReactNode; href: string }) {
-  return (
-    <a
-      href={href}
-      className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white/5 px-8 py-4 font-semibold text-foreground backdrop-blur transition-colors hover:bg-white/10"
-    >
-      {children}
-    </a>
   );
 }
 
@@ -986,16 +975,7 @@ export default function SummitPage() {
                           >
                             <div className="text-xs text-muted-foreground tabular-nums shrink-0 w-44">{s.time}</div>
                             <div className="flex-1 text-sm font-medium">
-                              {s.title === "Optional: Golf Outing" ? (
-                                <a
-                                  href="/customer-summit-26-golf"
-                                  className="underline decoration-dotted underline-offset-4 hover:text-sunset transition-colors"
-                                >
-                                  {s.title} →
-                                </a>
-                              ) : (
-                                s.title
-                              )}
+                              {s.title}
                               {s.description && <AgendaDetails text={s.description} />}
                             </div>
                             <div className={`text-[10px] uppercase tracking-[0.2em] px-2.5 py-1 rounded-full shrink-0 ${
@@ -1227,10 +1207,9 @@ export default function SummitPage() {
                 Curio Collection by Hilton — a refined desert escape blending Southwest soul with modern luxury.
                 Spacious meeting venues, full-service spa, championship golf, and Old Town minutes away.
               </p>
-              <p className="text-muted-foreground mb-8">
+              <p className="text-muted-foreground">
                 Already registered? Check your inbox — your confirmation includes the discounted group rate.
               </p>
-              <GhostCTA href="#register">Reserve my room block</GhostCTA>
             </div>
           </div>
         </section>
