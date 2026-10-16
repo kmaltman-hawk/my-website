@@ -281,7 +281,7 @@ const AGENDA_DAYS: AgendaDay[] = [
     date: "Thursday, Oct 22",
     preview: "Keynotes · Training · Dev Track · Roadmap · Dinner in Old Town",
     sessions: [
-      { time: "9:00 AM", title: "Networking Breakfast", tag: "Networking" },
+      { time: "8:00 – 9:00 AM", title: "Networking Breakfast", tag: "Networking" },
       { time: "9:00 – 9:30 AM", title: "Opening Keynote — Ari Kahn, HawkSearch", tag: "Keynote" },
       { time: "9:30 – 10:00 AM", title: "The Road to Agentic Commerce: Oriental Trading’s Launch Story", tag: "Case Study" },
       { time: "10:00 – 10:30 AM", title: `${featuredSession("Jameel Dharsee").title} — Jameel Dharsee, MRC Global`, description: featuredSession("Jameel Dharsee").description, tag: "Presentation" },
@@ -292,7 +292,7 @@ const AGENDA_DAYS: AgendaDay[] = [
       { time: "1:00 – 2:30 PM", tag: "Concurrent", tracks: {
         main: [
           { title: "What If You Didn’t Need an eCommerce Platform? — Radu Munteanu, Luminos Labs", tag: "Sponsor", time: "1:00 – 1:30 PM", description: LUMINOS_ABSTRACT },
-          { title: "From Hours to Outcomes - Rethinking Professional Services", tag: "Presentation", time: "1:30 – 2:00 PM" },
+          { title: "From Hours to Outcomes: How Services Delivers Value in the Age of AI", tag: "Presentation", time: "1:30 – 2:00 PM" },
           { title: "Partner Panel Discussion with Shopware, The B2B eCommerce Agency, and Ollion", tag: "Panel", time: "2:00 – 2:30 PM" },
         ],
         dev: [
