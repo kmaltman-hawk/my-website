@@ -249,9 +249,9 @@ const FEATURED_SPEAKERS = [
   },
   {
     name: "Jeff Tannenbaum",
-    title: "Tanner",
+    title: "",
     img: "/customer-summit/speaker-jeff-tannenbaum.jpg",
-    imgAlt: "Jeff Tannenbaum of Tanner",
+    imgAlt: "Jeff Tannenbaum",
     sessionTitle: "Technology Decisions, and Search Data as Executive Intelligence",
     sessionDesc: "",
   },
@@ -323,7 +323,7 @@ const AGENDA_DAYS: AgendaDay[] = [
     preview: "Featured Session · Partner Panel · Trivia & Closing",
     sessions: [
       { time: "8:00 – 9:00 AM", title: "Networking Breakfast", tag: "Networking" },
-      { time: "9:00 – 9:30 AM", title: `${featuredSession("Jeff Tannenbaum").title} — Jeff Tannenbaum, Tanner`, description: featuredSession("Jeff Tannenbaum").description, tag: "Presentation" },
+      { time: "9:00 – 9:30 AM", title: `${featuredSession("Jeff Tannenbaum").title} — Jeff Tannenbaum`, description: featuredSession("Jeff Tannenbaum").description, tag: "Presentation" },
       { time: "9:30 – 10:00 AM", title: "Partner Panel Discussion with Pimberly, Conexiom, and NAW", tag: "Panel" },
       { time: "10:00 – 10:30 AM", title: "HawkSearch Dashboard Overhaul", tag: "Presentation" },
       { time: "10:30 – 11:00 AM", title: "Break (Coffee & Snacks)", tag: "Break" },
@@ -576,7 +576,7 @@ function FeaturedSpeakers() {
                   ★ Featured Speaker
                 </div>
                 <h3 className="font-display text-3xl sm:text-4xl mb-2">{s.name}</h3>
-                <p className="text-base sm:text-lg text-sand">{s.title}</p>
+                {s.title && <p className="text-base sm:text-lg text-sand">{s.title}</p>}
               </div>
             </div>
             <div className="text-[10px] uppercase tracking-[0.25em] text-sunset mb-2 font-semibold">Session</div>
