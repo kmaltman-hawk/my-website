@@ -16,7 +16,7 @@ export const LOGISTICS_RATINGS = [
   { key: "communications", label: "Pre-event communications" },
 ] as const;
 
-export const EXPECTATIONS = ["Exceeded", "Met", "Fell short"] as const;
+export const EXPECTATIONS = ["Fell short", "Met", "Exceeded"] as const;
 export const EVENT_LENGTHS = ["Too short", "Just right", "Too long"] as const;
 
 export const MONTHS = ["September", "October", "November"] as const;
